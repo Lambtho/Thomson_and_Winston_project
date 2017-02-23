@@ -108,9 +108,7 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 	@Override
 	public List<Produit> getAllProduct() {
 		
-		int verif=1;
 		
-		try{
 		String req= "SELECT p FROM Produit p";
 		
 		Query q=em.createQuery(req);
@@ -120,23 +118,22 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 		System.out.println(listProd);
 		
 		if (listProd.size()!=0){
-			return listProd;
-		}	
-		
-		}catch (Exception e){
 			
-			e.printStackTrace();
-
-			verif = 0;
-		}
+			return listProd;
+		
+		}else{	
+			
 			return null;
+		}
 	}
 		
 
 	@Override
 	public Produit getByIdProduct(int id_prod) {
-		// TODO Auto-generated method stub
-		return null;
+	
+			Produit pr1=em.find(Produit.class, id_prod);
+			
+		return pr1;
 	}
 
 
