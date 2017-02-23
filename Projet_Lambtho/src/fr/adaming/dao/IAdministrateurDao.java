@@ -11,7 +11,7 @@ import fr.adaming.entities.Produit;
 @Local
 public interface IAdministrateurDao {
 	
-	public AdminProd isExist();
+	public AdminProd isExist(AdminProd admin);
 	
 	public int addProduct(Produit prod);
 	

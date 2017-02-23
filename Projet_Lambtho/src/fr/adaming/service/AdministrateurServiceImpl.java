@@ -18,9 +18,9 @@ public class AdministrateurServiceImpl implements IAdministrateurService{
 	IAdministrateurDao adminDao;
 	
 	@Override
-	public AdminProd isExistService() {
+	public AdminProd isExistService(AdminProd admin) {
 		
-		return adminDao.isExist();
+		return adminDao.isExist(admin);
 	}
 	
 	@Override

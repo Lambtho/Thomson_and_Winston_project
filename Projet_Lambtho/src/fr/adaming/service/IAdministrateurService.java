@@ -10,7 +10,7 @@ import fr.adaming.entities.Produit;
 @Local
 public interface IAdministrateurService {
 	
-	public AdminProd isExistService();
+	public AdminProd isExistService(AdminProd admin);
 	
 	public int addProductService(Produit prod);
 

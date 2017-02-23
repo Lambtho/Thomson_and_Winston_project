@@ -2,11 +2,14 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Client;
 import fr.adaming.entities.Commande;
 import fr.adaming.entities.Produit;
 
+@Stateless
 public class ClientDaoImpl implements IClientDao {
 
 	@Override
