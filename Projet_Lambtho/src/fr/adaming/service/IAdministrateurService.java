@@ -1,0 +1,21 @@
+package fr.adaming.service;
+
+import java.util.List;
+
+import javax.ejb.Local;
+import fr.adaming.entities.Produit;
+
+@Local
+public interface IAdministrateurService {
+	
+	public int addProductService(Produit prod);
+
+	public int delProductService(int id_prod);
+
+	public int updateProductService(Produit prod);
+
+	public List<Produit> getAllProductService();
+
+	public Produit getByIdProductService(int id_prod);
+
+}
