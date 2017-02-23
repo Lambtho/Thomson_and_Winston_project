@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="Projet_Lambtho">
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="PU_TP" transaction-type="JTA">
+		<!-- Déclaration de la dataSource -->
+		<jta-data-source>java:/db_Thomson_and_Winston_cie</jta-data-source>
+
+		<!-- Déclaration des entitées mappées -->
+		<class>fr.adaming.entities.AdminProd</class>
+		<class>fr.adaming.entities.Categorie</class>
+		<class>fr.adaming.entities.Client</class>
+		<class>fr.adaming.entities.Commande</class>
+		<class>fr.adaming.entities.LigneCommande</class>
+		<class>fr.adaming.entities.Panier</class>
+		<class>fr.adaming.entities.Produit</class>
+
+		<properties>
+			<!-- validate -->
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
 	</persistence-unit>
 </persistence>

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Produit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	// Attributs
 	@Id
 	@Column(name = "id_prd")
@@ -30,8 +30,6 @@ public class Produit implements Serializable {
 	private int quantite;
 	@Column(name = "selectionne_prd")
 	private boolean selectionne;
-	@Column(name = "photo_prd")
-	private String photo;
 
 	// Constructeurs
 
@@ -39,19 +37,17 @@ public class Produit implements Serializable {
 		super();
 	}
 
-	public Produit(String designation, String description, double prix, int quantite, boolean selectionne,
-			String photo) {
+	public Produit(String designation, String description, double prix, int quantite, boolean selectionne) {
 		super();
 		this.designation = designation;
 		this.description = description;
 		this.prix = prix;
 		this.quantite = quantite;
 		this.selectionne = selectionne;
-		this.photo = photo;
 	}
 
 	public Produit(long idProduit, String designation, String description, double prix, int quantite,
-			boolean selectionne, String photo) {
+			boolean selectionne) {
 		super();
 		this.idProduit = idProduit;
 		this.designation = designation;
@@ -59,7 +55,6 @@ public class Produit implements Serializable {
 		this.prix = prix;
 		this.quantite = quantite;
 		this.selectionne = selectionne;
-		this.photo = photo;
 	}
 
 	// Getters & Setters
@@ -112,19 +107,10 @@ public class Produit implements Serializable {
 		this.selectionne = selectionne;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", designation=" + designation + ", description=" + description
-				+ ", prix=" + prix + ", quantite=" + quantite + ", selectionne=" + selectionne + ", photo=" + photo
-				+ "]";
+				+ ", prix=" + prix + ", quantite=" + quantite + ", selectionne=" + selectionne + "]";
 	}
 
 }
