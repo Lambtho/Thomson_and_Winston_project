@@ -4,11 +4,18 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import fr.adaming.entities.AdminProd;
 import fr.adaming.entities.Produit;
 
 @Stateless
 public class AdministrateurDaoImpl implements IAdministrateurDao {
 
+	@Override
+	public AdminProd isExist() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public int addProduct(Produit prod) {
 		// TODO Auto-generated method stub
@@ -38,5 +45,7 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

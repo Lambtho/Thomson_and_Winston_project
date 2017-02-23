@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import fr.adaming.entities.AdminProd;
 import fr.adaming.entities.Produit;
 
 @Local
 public interface IAdministrateurDao {
+	
+	public AdminProd isExist();
 	
 	public int addProduct(Produit prod);
 	

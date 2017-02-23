@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import fr.adaming.dao.IAdministrateurDao;
+import fr.adaming.entities.AdminProd;
 import fr.adaming.entities.Produit;
 
 @Stateless
@@ -15,6 +16,12 @@ public class AdministrateurServiceImpl implements IAdministrateurService{
 	
 	@EJB
 	IAdministrateurDao adminDao;
+	
+	@Override
+	public AdminProd isExistService() {
+		
+		return adminDao.isExist();
+	}
 	
 	@Override
 	public int addProductService(Produit prod) {
@@ -45,5 +52,7 @@ public class AdministrateurServiceImpl implements IAdministrateurService{
 		
 		return adminDao.getByIdProduct(id_prod);
 	}
+
+	
 
 }
