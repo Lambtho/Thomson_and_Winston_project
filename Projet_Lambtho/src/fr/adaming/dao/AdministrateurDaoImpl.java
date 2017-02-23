@@ -60,7 +60,7 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 	@Override
 	public int delProduct(int id_prod) {
 		
-int verif=1;
+		int verif=1;
 		
 		try{
 			
@@ -81,19 +81,28 @@ int verif=1;
 	@Override
 	public int updateProduct(Produit prod) {
 		
-		Produit prd =em.find(Produit.class, prod.getIdProduit());
+		int verif=1;
 		
-		prd.setDesignation(prod.getDesignation());
-		prd.setDescription(prod.getDescription());
+		try{
+			
+			Produit prd =em.find(Produit.class, prod.getIdProduit());
+			
+			prd.setDesignation(prod.getDesignation());
+			prd.setDescription(prod.getDescription());
+			prd.setPrix(prod.getPrix());
+			prd.setQuantite(prod.getQuantite());
+			prd.setSelectionne(prod.isSelectionne());
+			
+			em.merge(prd);
+			
+		}catch (Exception e){
+			
+			e.printStackTrace();
+
+			verif = 0;
+		}
 		
-		u.setNom(user.getNom());
-		u.setPrenom(user.getPrenom());
-		u.setMail(user.getMail());
-		u.setNaissance(user.getNaissance());
-		System.out.println(u);
-		em.merge(u);
-		
-		return 0;
+		return verif;
 	}
 
 	@Override
