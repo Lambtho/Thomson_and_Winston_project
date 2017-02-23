@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +26,10 @@ public class LigneCommande implements Serializable {
 	private int quantite;
 	@Column(name = "prix_lcmd")
 	private double prix;
+	
+	@ManyToOne
+	@JoinColumn(name="id_cmd_fk", referencedColumnName="id_cmd")
+	private Commande commande;
 
 	//Constructeurs
 	public LigneCommande() {

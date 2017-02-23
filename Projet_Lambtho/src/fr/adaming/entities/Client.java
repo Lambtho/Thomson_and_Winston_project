@@ -1,12 +1,15 @@
 package fr.adaming.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +31,9 @@ public class Client implements Serializable {
 	private String email;
 	@Column(name = "tel_cl")
 	private String tel;
+	
+	@OneToMany (mappedBy="client", cascade=CascadeType.ALL)
+	private List<Commande> listeCommande;
 
 	//Constructeurs
 	public Client() {
@@ -90,6 +96,17 @@ public class Client implements Serializable {
 
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+
+	
+	
+
+	public List<Commande> getListeCommande() {
+		return listeCommande;
+	}
+
+	public void setListeCommande(List<Commande> listeCommande) {
+		this.listeCommande = listeCommande;
 	}
 
 	@Override
