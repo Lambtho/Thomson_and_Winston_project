@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Login - Administration</title>
+</h:head>
+
+<h:body>
+	<p:breadCrumb>
+		<p:menuitem value="Accueil" url="/accueil.xhtml" />
+	</p:breadCrumb>
+	<f:event type="preRenderView" listener="#{adminMB.checkPermissionslogin}" />
+	<div align="center">
+		<h1>Page de connexion</h1>
+		<h:form>
+			<h:panelGrid columns="3">
+				<h:outputText value="eMail : " />
+				<h:inputText id="mail_id" value="#{adminMB.administrateur.email}"
+					required="true" label="Mail">
+					<!-- 					<f:validator validatorId="validatorEmail" /> -->
+				</h:inputText>
+				<h:message for="mail_id" style="color:red" />
+
+				<h:outputText value="Mot de passe : " />
+				<h:inputSecret id="pwd_id"
+					value="#{adminMB.administrateur.password}" required="true"
+					label="Password" />
+				<h:message for="pwd_id" style="color:red" />
+			</h:panelGrid>
+			<h:commandButton value="Connexion" action="#{adminMB.connexion}" />
+			<h:messages />
+		</h:form>
+	</div>
+</h:body>
+
+</html>
