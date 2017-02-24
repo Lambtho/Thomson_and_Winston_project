@@ -31,9 +31,9 @@ public class ClientServiceImpl implements IClientService {
 	}
 
 	@Override
-	public List<Produit> getProductByPanierService(List<Integer> listePanier) {
+	public List<Produit> getProductByIdService(Produit produit) {
 		
-		return clientDao.getProductByPanier(listePanier);
+		return clientDao.getProductById(produit);
 	}
 
 	@Override

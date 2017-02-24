@@ -17,7 +17,7 @@ public interface IClientService {
 	
 	public List<Produit> getProductByCatService(int id_cat);
 	
-	public List<Produit> getProductByPanierService(List<Integer> listePanier);
+	public List<Produit> getProductByIdService(Produit produit);
 	
 	public List<Produit> getProductByKeyWordService (String keyWord);
 	

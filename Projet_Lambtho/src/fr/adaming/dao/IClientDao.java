@@ -16,7 +16,7 @@ public interface IClientDao {
 	
 	public List<Produit> getProductByCat(int id_cat);
 	
-	public List<Produit> getProductByPanier(List<Integer> listePanier);
+	public List<Produit> getProductById(Produit produit);
 	
 	public List<Produit> getProductByKeyWord (String keyWord);
 	

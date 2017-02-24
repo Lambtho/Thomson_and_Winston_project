@@ -3,6 +3,10 @@ package fr.adaming.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
 import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Client;
@@ -12,34 +16,102 @@ import fr.adaming.entities.Produit;
 @Stateless
 public class ClientDaoImpl implements IClientDao {
 
+	@PersistenceContext(unitName="PU_TP")
+	EntityManager em;
+
 	@Override
 	public List<Categorie> getAllCategories() {
-		// TODO Auto-generated method stub
-		return null;
+
+		String req = "SELECT c FROM Categorie c";
+
+		Query q = em.createQuery(req);
+
+		List<Categorie> listCat = q.getResultList();
+
+		System.out.println(listCat);
+
+		if (listCat.size() != 0) {
+
+			return listCat;
+
+		} else {
+
+			return null;
+		}
+
 	}
 
 	@Override
 	public List<Produit> getProductByCat(int id_cat) {
-		// TODO Auto-generated method stub
-		return null;
+		String req = "SELECT p FROM Produit as p RIGHT JOIN  c ON Categorie as c WHERE c.categorie.id=:pId_cat";
+
+		Query query = em.createQuery(req);
+		query.setParameter("pId_cat", id_cat);
+
+		List<Produit> listeProd = query.getResultList();
+
+		System.out.println("------- Liste des produits par catégories------------");
+
+		for (Produit p : listeProd) {
+			System.out.println(p);
+		}
+		return listeProd;
 	}
 
 	@Override
-	public List<Produit> getProductByPanier(List<Integer> listePanier) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Produit> getProductById(Produit produit) {
+
+		String req = "SELECT * FROM produits WHERE id_prd=?" ;
+
+		Query query = em.createNativeQuery(req);
+		query.setParameter(1, produit.getIdProduit());
+
+		List<Produit> listeProdId = query.getResultList();
+
+		System.out.println("------- Liste des produits par panier------------");
+
+		for (Produit p : listeProdId) {
+			System.out.println(p);
+		}
+
+		return listeProdId;
 	}
 
 	@Override
 	public List<Produit> getProductByKeyWord(String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
+
+		String sqlReq = "SELECT * FROM produit where nom_prd=? ";
+
+		Query query = em.createNativeQuery(sqlReq);
+		query.setParameter(1, "%"+keyWord+"%");
+
+		List<Produit> listeProd = query.getResultList();
+
+		System.out.println("------- Liste des produits par mot clés------------");
+
+		for (Produit p : listeProd) {
+			System.out.println(p);
+		}
+		return listeProd;
 	}
 
 	@Override
 	public int order(Client client, Commande commande) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int verif=1;
+		
+		try{
+		
+			em.persist(client);
+			em.persist(commande);
+			
+			
+		}catch (PersistenceException e){
+			e.printStackTrace();
+			
+			verif =0;
+		}
+		return verif;
 	}
 
 }

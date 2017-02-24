@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
@@ -13,7 +14,8 @@ import fr.adaming.entities.Produit;
 @Stateless
 public class AdministrateurDaoImpl implements IAdministrateurDao {
 	
-	EntityManager em=null;
+	@PersistenceContext (unitName="PU_TP")
+	EntityManager em ;
 
 	@Override
 	public AdminProd isExist(AdminProd admin) {
@@ -135,10 +137,5 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 			
 		return pr1;
 	}
-
-
-	
-
-	
 
 }
