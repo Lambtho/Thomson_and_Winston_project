@@ -75,6 +75,7 @@ public class Categorie implements Serializable {
 	}
 
 	
+	
 	public List<Produit> getListeProduits() {
 		return listeProduits;
 	}
