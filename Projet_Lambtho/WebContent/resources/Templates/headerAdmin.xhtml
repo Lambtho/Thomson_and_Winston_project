@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="keywords" content="${metaKeywords}" />
+	<meta http-equiv="description" content="${metaDescription}" />
+</h:head>
+
+<h:body>
+	<!-- 	Menu -->
+	<ui:composition>
+		<f:event type="preRenderView" listener="#{adminMB.checkPermissions}" />
+		<p:breadCrumb>
+			<p:menuitem value="Accueil" url="/accueil.xhtml" />
+			<p:menuitem value="Accueil" url="/Admin/accueilAdmin.xhtml" />
+			<p:menuitem value="Ajouter" url="/Admin/ajoutProduct.xhtml" />
+			<p:menuitem value="Modifier" url="/Admin/modificationProduct.xhtml" />
+			<p:menuitem value="Supprimer" url="/Admin/suppressionProduct.xhtml" />
+			<p:menuitem value="Chercher" url="/Admin/rechercheProduct.xhtml" />
+		</p:breadCrumb>
+		<h:form>
+			<h:commandButton value="Déconnexion" action="#{adminMB.deconnexion}"></h:commandButton>
+		</h:form>
+	</ui:composition>
+</h:body>
+</html>
