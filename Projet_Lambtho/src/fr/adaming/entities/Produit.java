@@ -73,7 +73,6 @@ public class Produit implements Serializable {
 	}
 
 	// Getters & Setters
-
 	public long getIdProduit() {
 		return idProduit;
 	}
