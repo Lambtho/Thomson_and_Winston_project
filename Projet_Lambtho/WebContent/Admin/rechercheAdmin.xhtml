@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Ajout Produit</title>
+</h:head>
+
+<h:body>
+	<ui:insert>
+		<ui:include src="/resources/Templates/headerAdmin.xhtml" />
+	</ui:insert>
+	<h1>Interface Administrateur</h1>
+	<h2>Recherche d'un produit</h2>
+	<h:form>
+		<h:panelGrid columns="3">
+			<h:outputText value="Id Produit : " />
+			<h:selectOneMenu id="idProd_id" label="Id produit"
+				value="#{adminMB.indexSelectId}">
+				<f:selectItems value="#{adminMB.listeProduits}" var="produit"
+					itemLabel="#{produit.idProduit}" itemValue="#{produit.idProduit}" />
+			</h:selectOneMenu>
+			<h:message for="idProd_id" style="color:red" />
+		</h:panelGrid>
+		<h:commandButton value="Rechercher" action="#{adminMB.delProduct}" />
+	</h:form>
+	<p:dataTable var="produit" value="#{adminMB.produit}">
+		<p:column headerText="Id">
+			<h:outputText value="#{produit.idProduit}" />
+		</p:column>
+		<p:column headerText="Désignation">
+			<h:outputText value="#{produit.designation}" />
+		</p:column>
+		<p:column headerText="Description">
+			<h:outputText value="#{produit.description}" />
+		</p:column>
+		<p:column headerText="Prix">
+			<h:outputText value="#{produit.prix}" />
+		</p:column>
+		<p:column headerText="Quantité">
+			<h:outputText value="#{produit.quantite}" />
+		</p:column>
+		<p:column headerText="Selection">
+			<h:outputText value="#{produit.selectionne}" />
+		</p:column>
+		<p:column headerText="Catégorie">
+			<h:outputText value="#{produit.categorie.nomCategorie}" />
+		</p:column>
+	</p:dataTable>
+	<br />
+	<br />
+</h:body>
+</html>

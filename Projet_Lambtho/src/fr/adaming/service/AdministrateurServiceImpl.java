@@ -30,7 +30,7 @@ public class AdministrateurServiceImpl implements IAdministrateurService{
 	}
 
 	@Override
-	public int delProductService(int id_prod) {
+	public int delProductService(long id_prod) {
 		
 		return adminDao.delProduct(id_prod);
 	}
@@ -48,7 +48,7 @@ public class AdministrateurServiceImpl implements IAdministrateurService{
 	}
 
 	@Override
-	public Produit getByIdProductService(int id_prod) {
+	public Produit getByIdProductService(long id_prod) {
 		
 		return adminDao.getByIdProduct(id_prod);
 	}

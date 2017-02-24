@@ -18,7 +18,7 @@
 		<h:panelGrid columns="3">
 		<h:outputText value="Id Produit : " />
 			<h:selectOneMenu id="idProd_id" label="Id produit"
-				value="#{adminMB.indexSelect}">
+				value="#{adminMB.indexSelectId}">
 				<f:selectItems value="#{adminMB.listeProduits}" var="produit"
 					itemLabel="#{produit.idProduit}"
 					itemValue="#{produit.idProduit}" />

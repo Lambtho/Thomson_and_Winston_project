@@ -14,12 +14,12 @@ public interface IAdministrateurService {
 	
 	public int addProductService(Produit prod);
 
-	public int delProductService(int id_prod);
+	public int delProductService(long id_prod);
 
 	public int updateProductService(Produit prod);
 
 	public List<Produit> getAllProductService();
 
-	public Produit getByIdProductService(int id_prod);
+	public Produit getByIdProductService(long id_prod);
 
 }

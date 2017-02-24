@@ -25,6 +25,7 @@ public class AdminManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	//Attributs
 	AdminProd administrateur;
 
 	@EJB
@@ -39,6 +40,7 @@ public class AdminManagedBean implements Serializable {
 	List<Produit> listeProduits;
 	int resultat;
 	String indexSelect;
+	String indexSelectId;
 
 	public AdminManagedBean() {
 		this.administrateur = new AdminProd();
@@ -103,40 +105,47 @@ public class AdminManagedBean implements Serializable {
 		this.listeProduits = listeProduits;
 	}
 
+	public String getIndexSelectId() {
+		return indexSelectId;
+	}
+
+	public void setIndexSelectId(String indexSelectId) {
+		this.indexSelectId = indexSelectId;
+	}
+
 	// Méthodes
 	@PostConstruct
 	public void getAllPostConstr() {
-		// this.listeCategories = clientService.getAllCategories();
-		Categorie cat = new Categorie(1, "ma categorie", "ceci est la description de la catégorie");
-		this.listeCategories.add(cat);
-		cat = new Categorie(2, "ma categorie 2", "ceci est la description de la catégorie");
-		this.listeCategories.add(cat);
-		
+		this.listeCategories = clientService.getAllCategories();
 		this.listeProduits = adminService.getAllProductService();
 	}
 
-
 	public String addProduct() {
-//		this.produit.setCategorie(this.listeCategories.get(Integer.parseInt(this.indexSelect)-1));
+		this.produit.setCategorie(this.listeCategories.get(Integer.parseInt(this.indexSelect) - 1));
 		this.resultat = adminService.addProductService(this.produit);
 		return "Accueil";
 	}
 
 	public String delProduct() {
-		this.resultat = adminService.delProductService(Integer.parseInt(indexSelect));
+		this.resultat = adminService.delProductService(Long.parseLong(indexSelectId));
 		return "Accueil";
 	}
-	
+
 	public String updateProduct() {
+		this.produit.setIdProduit(Long.parseLong(indexSelectId));
 		this.resultat = adminService.updateProductService(this.produit);
 		return "Accueil";
 	}
+//	<==================================================================>
+//	public String findProduct() {
+//		this.produit.setIdProduit(Long.parseLong(indexSelectId));
+//		this.resultat = adminService.updateProductService(this.produit);
+//		return "Accueil";
+//	}
 
 	public String connexion() {
 
-		// this.administrateur =
-		// adminService.isExistService(this.administrateur);
-		this.administrateur = new AdminProd("Thovex Candide", "candide@thovex", "ct");
+		this.administrateur = adminService.isExistService(this.administrateur);
 		if (administrateur != null) {
 			// Créer une session et ajouter l'agent à celle-ci
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("agentSession", administrateur);

@@ -15,13 +15,13 @@ public interface IAdministrateurDao {
 	
 	public int addProduct(Produit prod);
 	
-	public int delProduct(int id_prod);
+	public int delProduct(long id_prod);
 	
 	public int updateProduct (Produit prod);
 	
 	public List<Produit> getAllProduct ();
 	
-	public Produit getByIdProduct(int id_prod);
+	public Produit getByIdProduct(long id_prod);
 	
 	
 }
