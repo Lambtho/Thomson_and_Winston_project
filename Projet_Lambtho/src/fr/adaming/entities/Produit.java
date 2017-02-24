@@ -123,8 +123,6 @@ public class Produit implements Serializable {
 	}
 
 	
-	
-
 	public Categorie getCategorie() {
 		return categorie;
 	}
