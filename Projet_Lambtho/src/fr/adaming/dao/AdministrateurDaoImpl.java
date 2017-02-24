@@ -20,7 +20,7 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 	@Override
 	public AdminProd isExist(AdminProd admin) {
 		
-		String req = "SELECT a FROM Agent a WHERE a.mail=:pMail AND a.password=:pMdp" ;
+		String req = "SELECT a FROM AdminProd a WHERE a.mail=:pMail AND a.password=:pMdp" ;
 
 		Query query = em.createQuery(req);
 
