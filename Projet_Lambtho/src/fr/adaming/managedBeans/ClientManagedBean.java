@@ -123,6 +123,7 @@ public class ClientManagedBean implements Serializable {
 	@PostConstruct
 	public void getAllCategories() {
 		this.listeCategories = clientService.getAllCategories();
+		this.listeProduits = clientService.getProductByKeyWordService("a");
 	}
 
 	public String getProdByCat() {
@@ -137,9 +138,9 @@ public class ClientManagedBean implements Serializable {
 		return null;
 	}
 	
-//	public String selectProduct(){
-//		this.listeProduitsCmd.add(this.produit);
+	public String selectProduct(){
+		this.listeProduitsCmd.add(this.produit);
 //		this.listeLignesCmd.add(e)
-//		return null;
-//	}
+		return null;
+	}
 }
