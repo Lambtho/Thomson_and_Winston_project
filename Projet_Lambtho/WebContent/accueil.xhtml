@@ -8,14 +8,22 @@
 
 <h:head>
 	<title>Accueil</title>
+	<h:outputStylesheet library="css" name="style.css"  />
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
 <h:body>
 	<h1>Accueil</h1>
-	<ui:insert>
-		<ui:include src="/resources/Templates/headerClient.xhtml" />
-	</ui:insert>
-
+	<div class="header">
+		<ui:insert>
+			<ui:include src="/resources/Templates/headerClient.xhtml" />
+		</ui:insert>
+	</div>
+	<div class="barreRecherche"></div>
+	<div class="menuCategories"></div>
+	<div class="produits"></div>
+	<div class="footer"></div>
 
 </h:body>
 </html>
