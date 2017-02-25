@@ -80,7 +80,7 @@ public class ClientDaoImpl implements IClientDao {
 	@Override
 	public List<Produit> getProductByKeyWord(String keyWord) {
 
-		String sqlReq = "SELECT * FROM produit where  nom_prd like ? ";
+		String sqlReq = "SELECT * FROM produits where  nom_prd like ? ";
 
 		Query query = em.createNativeQuery(sqlReq, Produit.class);
 		query.setParameter(1, "%"+keyWord+"%");
