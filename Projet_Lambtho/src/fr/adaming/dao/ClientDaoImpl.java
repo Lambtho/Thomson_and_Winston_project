@@ -43,9 +43,9 @@ public class ClientDaoImpl implements IClientDao {
 
 	@Override
 	public List<Produit> getProductByCat(int id_cat) {
-		String req = "SELECT p FROM Produit as p LEFT JOIN Categorie as c ON c.idCategorie= p.c.idCategorie WHERE c.idCategorie =:pId_cat";
+		String req = "SELECT * FROM produits as p LEFT JOIN categories as c ON c.id_cat= p.categorie_id_fk  WHERE id_cat =:pId_cat";
 
-		Query query = em.createQuery(req);
+		Query query = em.createNativeQuery(req, Produit.class);
 		query.setParameter("pId_cat", id_cat);
 
 		List<Produit> listeProd = query.getResultList();
