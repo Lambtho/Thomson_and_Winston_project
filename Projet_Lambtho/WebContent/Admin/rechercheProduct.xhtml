@@ -26,7 +26,7 @@
 			</h:selectOneMenu>
 			<h:message for="idProd_id" style="color:red" />
 		</h:panelGrid>
-		<h:commandButton value="Rechercher" action="#{adminMB.delProduct}" />
+		<h:commandButton value="Rechercher" action="#{adminMB.findProduct}" />
 	</h:form>
 	<p:dataTable var="produit" value="#{adminMB.produit}">
 		<p:column headerText="Id">

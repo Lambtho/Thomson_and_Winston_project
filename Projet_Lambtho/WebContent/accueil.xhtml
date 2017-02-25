@@ -16,6 +16,36 @@
 		<ui:include src="/resources/Templates/headerClient.xhtml" />
 	</ui:insert>
 
+	<h:form>
+		<p:dataTable var="produit" value="#{clientMB.listeProduits}">
+			<p:column headerText="Id">
+				<h:outputText value="#{produit.idProduit}" />
+			</p:column>
+			<p:column headerText="Désignation">
+				<h:outputText value="#{produit.designation}" />
+			</p:column>
+			<p:column headerText="Description">
+				<h:outputText value="#{produit.description}" />
+			</p:column>
+			<p:column headerText="Prix">
+				<h:outputText value="#{produit.prix}" />
+			</p:column>
+			<p:column headerText="Quantité">
+				<h:outputText value="#{produit.quantite}" />
+			</p:column>
+			<p:column headerText="Selection">
+				<h:outputText value="#{produit.selectionne}" />
+			</p:column>
+			<p:column headerText="Catégorie">
+				<h:outputText value="#{produit.categorie.nomCategorie}" />
+			</p:column>
+			<p:column>
+			<h:commandButton action="#{clientMB.}"></h:commandButton>
+			</p:column>
+		</p:dataTable>
+
+	</h:form>
+
 
 </h:body>
 </html>

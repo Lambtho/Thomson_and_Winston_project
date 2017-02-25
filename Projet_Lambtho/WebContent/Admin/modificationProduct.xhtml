@@ -16,15 +16,27 @@
 	<h1>Modification Produit</h1>
 	<h:form>
 		<h:panelGrid columns="3">
-		<h:outputText value="Id Produit : " />
+			<h:outputText value="Id Produit : " />
 			<h:selectOneMenu id="idProd_id" label="Id produit"
-				value="#{adminMB.indexSelectId}">
-				<f:selectItems value="#{adminMB.listeProduits}" var="produit"
-					itemLabel="#{produit.idProduit}"
-					itemValue="#{produit.idProduit}" />
+				value="#{adminMB.indexSelectId}" onchange="submit()"
+				valueChangeListener="#{adminMB.refreshOneProduct}">
+				<f:selectItems value="#{adminMB.listeProduits}" var="produits"
+					itemLabel="#{produits.idProduit}" itemValue="#{produits.idProduit}" />
 			</h:selectOneMenu>
 			<h:message for="idProd_id" style="color:red" />
-			
+		</h:panelGrid>
+	</h:form>
+	<h:form>
+		<h:panelGrid columns="3">
+			<h:outputText value="Catégorie : " />
+			<h:selectOneMenu id="categorie_id" label="Catégorie" value="#{adminMB.indexSelect}"
+				valueChangeListener="#{adminMB.refreshOneCategorie}">
+				<f:selectItems value="#{adminMB.listeCategories}" var="categorie"
+					itemLabel="#{categorie.nomCategorie}"
+					itemValue="#{categorie.idCategorie}" />
+			</h:selectOneMenu>
+			<h:message for="categorie_id" style="color:red" />
+
 			<h:outputText value="Désignation : " />
 			<h:inputText id="designation_id"
 				value="#{adminMB.produit.designation}" required="true"
@@ -36,15 +48,6 @@
 				value="#{adminMB.produit.description}" required="true"
 				label="Description" />
 			<h:message for="description_id" style="color:red" />
-
-			<h:outputText value="Catégorie : " />
-			<h:selectOneMenu id="categorie_id" label="Catégorie"
-				value="#{adminMB.indexSelect}">
-				<f:selectItems value="#{adminMB.listeCategories}" var="categorie"
-					itemLabel="#{categorie.nomCategorie}"
-					itemValue="#{categorie.idCategorie}" />
-			</h:selectOneMenu>
-			<h:message for="categorie_id" style="color:red" />
 
 			<h:outputText value="Prix : " />
 			<h:inputText id="prix_id" value="#{adminMB.produit.prix}"

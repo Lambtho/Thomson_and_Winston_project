@@ -15,18 +15,18 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/*</from-view-id>
+		<from-view-id>/Admin/*</from-view-id>
 		<navigation-case>
 			<from-outcome>Accueil</from-outcome>
-			<to-view-id>accueil.xhtml</to-view-id>
+			<to-view-id>/Admin/accueilAdmin.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>Succes</from-outcome>
-			<to-view-id>accueil.xhtml</to-view-id>
+			<to-view-id>/Admin/accueilAdmin.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>Echec</from-outcome>
-			<to-view-id>index.xhtml</to-view-id>
+			<to-view-id>/Admin/accueilAdmin.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

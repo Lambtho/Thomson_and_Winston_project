@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpSession;
 
 import fr.adaming.entities.AdminProd;
@@ -25,7 +26,7 @@ public class AdminManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	//Attributs
+	// Attributs
 	AdminProd administrateur;
 
 	@EJB
@@ -47,6 +48,7 @@ public class AdminManagedBean implements Serializable {
 		this.produit = new Produit();
 		this.categorie = new Categorie();
 		this.listeCategories = new ArrayList<>();
+		this.indexSelectId="";
 	}
 
 	public AdminProd getAdministrateur() {
@@ -116,8 +118,10 @@ public class AdminManagedBean implements Serializable {
 	// Méthodes
 	@PostConstruct
 	public void getAllPostConstr() {
+
 		this.listeCategories = clientService.getAllCategories();
 		this.listeProduits = adminService.getAllProductService();
+		this.produit = listeProduits.get(0);
 	}
 
 	public String addProduct() {
@@ -132,16 +136,30 @@ public class AdminManagedBean implements Serializable {
 	}
 
 	public String updateProduct() {
-		this.produit.setIdProduit(Long.parseLong(indexSelectId));
+		System.out.println("=========================>" + this.produit);
+		this.produit.setCategorie(this.categorie);
+		System.out.println("+++++++++++++++++++++++++>" + this.produit);
 		this.resultat = adminService.updateProductService(this.produit);
 		return "Accueil";
 	}
-//	<==================================================================>
-//	public String findProduct() {
-//		this.produit.setIdProduit(Long.parseLong(indexSelectId));
-//		this.resultat = adminService.updateProductService(this.produit);
-//		return "Accueil";
-//	}
+
+	public String findProduct() {
+		this.produit = adminService.getByIdProductService(Long.parseLong(indexSelectId));
+		return null;
+	}
+
+	public void refreshOneProduct(ValueChangeEvent event) {
+
+		long newId = Long.parseLong((String) event.getNewValue());
+		this.produit = adminService.getByIdProductService(newId);
+		System.out.println("////////////////////////////>" + this.produit);
+
+	}
+
+	public void refreshOneCategorie(ValueChangeEvent event) {
+
+		this.categorie = this.listeCategories.get(Integer.parseInt((String) event.getNewValue()) - 1);
+		}
 
 	public String connexion() {
 
