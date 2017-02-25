@@ -14,7 +14,8 @@
 	<p:breadCrumb>
 		<p:menuitem value="Accueil" url="/accueil.xhtml" />
 	</p:breadCrumb>
-	<f:event type="preRenderView" listener="#{adminMB.checkPermissionslogin}" />
+	<f:event type="preRenderView"
+		listener="#{adminMB.checkPermissionslogin}" />
 	<div align="center">
 		<h1>Page de connexion</h1>
 		<h:form>
@@ -33,7 +34,6 @@
 				<h:message for="pwd_id" style="color:red" />
 			</h:panelGrid>
 			<h:commandButton value="Connexion" action="#{adminMB.connexion}" />
-			<h:messages />
 		</h:form>
 	</div>
 </h:body>
