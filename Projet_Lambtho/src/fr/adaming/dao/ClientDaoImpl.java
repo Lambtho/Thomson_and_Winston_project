@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,9 +14,15 @@ import fr.adaming.entities.Client;
 import fr.adaming.entities.Commande;
 import fr.adaming.entities.Produit;
 
+/**
+ * @see IClientDao
+ * @author Thomas et lambert
+ *
+ */
+
 @Stateless
 public class ClientDaoImpl implements IClientDao {
-
+	
 	@PersistenceContext(unitName="PU_TP")
 	EntityManager em;
 
@@ -41,6 +48,7 @@ public class ClientDaoImpl implements IClientDao {
 
 	}
 
+	
 	@Override
 	public List<Produit> getProductByCat(int id_cat) {
 		String req = "SELECT * FROM produits as p LEFT JOIN categories as c ON c.id_cat= p.categorie_id_fk  WHERE id_cat =:pId_cat";
@@ -57,18 +65,20 @@ public class ClientDaoImpl implements IClientDao {
 		}
 		return listeProd;
 	}
+	
+	
 
 	@Override
 	public List<Produit> getProductById(Produit produit) {
 
 		String req = "SELECT * FROM produits WHERE id_prd=?" ;
 
-		Query query = em.createNativeQuery(req);
+		Query query = em.createNativeQuery(req, Produit.class);
 		query.setParameter(1, produit.getIdProduit());
 
 		List<Produit> listeProdId = query.getResultList();
 
-		System.out.println("---- Liste des produits par panier------------");
+		System.out.println("---- Liste des produits par Id------------");
 
 		for (Produit p : listeProdId) {
 			System.out.println(p);
@@ -77,6 +87,7 @@ public class ClientDaoImpl implements IClientDao {
 		return listeProdId;
 	}
 
+	
 	@Override
 	public List<Produit> getProductByKeyWord(String keyWord) {
 
@@ -94,6 +105,8 @@ public class ClientDaoImpl implements IClientDao {
 		}
 		return listeProd;
 	}
+	
+	
 
 	@Override
 	public int order(Client client) {
