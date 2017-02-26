@@ -18,7 +18,6 @@ import fr.adaming.entities.Produit;
 import fr.adaming.service.IAdministrateurService;
 import fr.adaming.service.IClientService;
 
-
 @ManagedBean(name = "clientMB")
 @SessionScoped
 public class ClientManagedBean implements Serializable {
@@ -154,50 +153,55 @@ public class ClientManagedBean implements Serializable {
 		this.listeProduits = clientService.getProductByKeyWordService(recherche);
 		return null;
 	}
-	
-//	public String order(){
-//		clientService.orderService(client, commande)
-//		this.commande
-//	}
+
+	public String order() {
+		List<Commande> listCmd = new ArrayList<Commande>();
+		listCmd = this.client.getListeCommande();
+		listCmd.add(this.commande);
+		this.client.setListeCommande(listCmd);
+		this.commande.setClient(this.client);
+		clientService.orderService(client, commande);
+//		débiter les stocks
+		return "Accueil";
+	}
 
 	public String selectProduct() {
 
-		int ajout = 0;
-
-		for (int i = 0; i < listeLignesCmd.size() - 1; i++) {
+		List<LigneCommande> llcmd = new ArrayList<LigneCommande>();
+		for (int i = 0; i < listeLignesCmd.size(); i++) {
 			LigneCommande lc = listeLignesCmd.get(i);
 			Produit p = lc.getProduit();
-			System.out.println(p.getIdProduit());
-			System.out.println(this.produit.getIdProduit());
+			System.out.println("+++++++++++++++++++>" + p.getIdProduit());
+			System.out.println("+++++++++++++++++++>" + this.produit.getIdProduit());
 
 			if (p.getIdProduit() == this.produit.getIdProduit()) {
-				this.listeLignesCmd.remove(lc);
+
 				System.out.println("coucou");
 				int quantt = lc.getQuantite() + this.produit.getQuantite();
 				lc.setQuantite(quantt);
 				lc.setPrix(quantt * this.produit.getPrix());
 
-				this.listeLignesCmd.get(i).setPrix(lc.getPrix());
-				this.listeLignesCmd.get(i).setQuantite(quantt);
-				ajout = 1;
 				break;
 			}
+			lc.setCommande(commande);
+			lc.setProduit(produit);
+			llcmd.add(lc);
 		}
-
-		if (ajout == 0) {
-			LigneCommande lcmd = new LigneCommande();
-			lcmd.setProduit(this.produit);
-			lcmd.setQuantite(this.produit.getQuantite());
-			double prix = this.produit.getPrix() * this.produit.getQuantite();
-			lcmd.setPrix(prix);
-			this.listeLignesCmd.add(lcmd);
-		}
+		this.listeLignesCmd.clear();
+		this.listeLignesCmd = llcmd;
 
 		// Le produit est sélectionné
 		this.produit.setSelectionne(true);
 		// Ajout du produit dans une liste
 		this.listeProduitsCmd.add(this.produit);
+		
+		
+		List<Commande> lcmd = new ArrayList<>();
+		this.produit.getListeCommandes();
+//		this.produit.setListeCommandes(listeCommandes);
 
+		
+		
 		// Ajout des lignes de commande et des produits dans la commande
 		this.commande.setListeLignesCommandes(listeLignesCmd);
 		this.commande.setListeProduits(listeProduitsCmd);

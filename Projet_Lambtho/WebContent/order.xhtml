@@ -7,7 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>Panier</title>
+	<title>Passer commande</title>
 	<h:outputStylesheet library="css" name="style.css" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputScript library="js" name="bootstrap.js" />
@@ -15,7 +15,7 @@
 
 <h:body>
 	<f:event type="preRenderView" listener="#{clientMB.getCart}" />
-	<h1>Panier</h1>
+	<h1>Passer Commande</h1>
 	<div class="header">
 		<ui:insert>
 			<ui:include src="/resources/Templates/headerClient.xhtml" />
@@ -24,37 +24,33 @@
 	<div class="barreRecherche"></div>
 	<div class="menuCategories">
 		<h:form>
-			<p:dataTable var="produit" value="#{clientMB.listeProduits}">
-				<p:column headerText="Id">
-					<h:outputText value="#{produit.idProduit}" />
-				</p:column>
-				<p:column headerText="Désignation">
-					<h:outputText value="#{produit.designation}" />
-				</p:column>
-				<p:column headerText="Description">
-					<h:outputText value="#{produit.description}" />
-				</p:column>
-				<p:column headerText="Prix">
-					<h:outputText value="#{produit.prix}" />
-				</p:column>
-				<p:column headerText="Quantité">
-					<h:outputText value="#{produit.quantite}" />
-				</p:column>
-				<p:column headerText="Selection">
-					<h:outputText value="#{produit.selectionne}" />
-				</p:column>
-				<p:column headerText="Catégorie">
-					<h:outputText value="#{produit.categorie.nomCategorie}" />
-				</p:column>
-				<p:column>
-					<h:commandButton action="#{clientMB.selectProduct}"
-						value="Supprimer">
-						<f:setPropertyActionListener value="#{produit}"
-							target="#{clientMB.produit}" />
-					</h:commandButton>
-				</p:column>
-			</p:dataTable>
-			<h:commandButton value="Passer la commande" />
+			<h2>Saisie de vos informations personnelles</h2>
+			<h:panelGrid columns="3">
+				<h:outputText value="Nom : " />
+				<h:inputText id="nom_id" value="#{clientMB.client.nomClient}"
+					required="true" label="Nom">
+				</h:inputText>
+				<h:message for="nom_id" style="color:red" />
+
+				<h:outputText value="Adresse : " />
+				<h:inputText id="adresse_id" value="#{clientMB.client.adresse}"
+					required="true" label="Adresse">
+				</h:inputText>
+				<h:message for="adresse_id" style="color:red" />
+
+				<h:outputText value="eMail : " />
+				<h:inputText id="mail_id" value="#{clientMB.client.email}"
+					required="true" label="Mail">
+					<!-- 					<f:validator validatorId="validatorEmail" /> -->
+				</h:inputText>
+				<h:message for="mail_id" style="color:red" />
+				<h:outputText value="Téléphone : " />
+				<h:inputText id="tel_id" value="#{clientMB.client.tel}"
+					required="true" label="Téléphnone">
+				</h:inputText>
+				<h:message for="nom_id" style="color:red" />
+				</h:panelGrid>
+			<h:commandButton value="Acheter" action="#{clientMB.order}" />
 		</h:form>
 	</div>
 	<div class="produits"></div>

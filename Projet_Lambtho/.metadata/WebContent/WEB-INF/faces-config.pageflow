@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14878485831960" configfile="/Projet_Lambtho/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="946" id="pf14878486436564" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14879836683844 pf14879836683845 pf14879836683846" path="/Admin/*"/>
-  <nodes xsi:type="pageflow:PFPage" name="Admin/login.xhtml" id="pf14878955283060" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf14878955283061 pf14878955283062" inlinks="pf14878955283062" path="/Admin/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="Admin/accueilAdmin.xhtml" id="pf14878955283073" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14878955283061" path="/Admin/accueilAdmin.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="Admin/accueil.xhtml" id="pf14879836683847" referenceLink="//@navigationRule.1/@navigationCase.2/@toViewId|" inlinks="pf14879836683844 pf14879836683845 pf14879836683846" path="/Admin/accueilAdmin.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="178" id="pf14878486436564" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14881096803690 pf14881096803691 pf14881096803692" path="/Admin/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="Admin/login.xhtml" x="122" y="562" id="pf14878955283060" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf14878955283061 pf14878955283062" inlinks="pf14878955283062" path="/Admin/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Admin/accueilAdmin.xhtml" x="338" y="178" id="pf14878955283073" referenceLink="//@navigationRule.2/@navigationCase.2/@toViewId|" inlinks="pf14878955283061 pf14881096803690 pf14881096803691 pf14881096803692" path="/Admin/accueilAdmin.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Admin/accueil.xhtml" x="122" y="946" id="pf14879836683847" referenceLink="//@navigationRule.1/@navigationCase.2/@toViewId|" path="/Admin/accueilAdmin.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="/*" id="pf14881096803706" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14881097087757 pf14881097087758 pf14881097087759" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="accueil.xhtml" id="pf148810970877510" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14881097087757 pf14881097087758 pf14881097087759" path="/accueil.xhtml"/>
   <links id="pf14878955283061" target="pf14878955283073" source="pf14878955283060" outcome="ConnectSuccess"/>
-  <links id="pf14878955283062" target="pf14878955283060" source="pf14878955283060" outcome="ConnectFail"/>
-  <links id="pf14879836683844" target="pf14879836683847" source="pf14878486436564" outcome="Accueil"/>
-  <links id="pf14879836683845" target="pf14879836683847" source="pf14878486436564" outcome="Succes"/>
-  <links id="pf14879836683846" target="pf14879836683847" source="pf14878486436564" outcome="Echec"/>
+  <links id="pf14881096803690" target="pf14878955283073" source="pf14878486436564" outcome="Accueil"/>
+  <links id="pf14881096803691" target="pf14878955283073" source="pf14878486436564" outcome="Succes"/>
+  <links id="pf14881096803692" target="pf14878955283073" source="pf14878486436564" outcome="Echec"/>
+  <links id="pf14878955283062" target="pf14878955283060" source="pf14878955283060" outcome="ConnectFail">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf14881097087757" target="pf148810970877510" source="pf14881096803706" outcome="Echec"/>
+  <links id="pf14881097087758" target="pf148810970877510" source="pf14881096803706" outcome="Succes"/>
+  <links id="pf14881097087759" target="pf148810970877510" source="pf14881096803706" outcome="Accueil"/>
 </pageflow:Pageflow>

@@ -102,7 +102,7 @@ public class ClientDaoImpl implements IClientDao {
 		
 		try{
 		
-			em.persist(client);
+//			em.persist(client);
 			em.persist(commande);
 			
 			
