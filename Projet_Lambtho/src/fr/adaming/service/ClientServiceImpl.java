@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 import fr.adaming.dao.IClientDao;
 import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Client;
-import fr.adaming.entities.Commande;
 import fr.adaming.entities.Produit;
 
 /**

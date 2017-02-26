@@ -35,6 +35,7 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 
 		query.setParameter("pMdp", admin.getPassword());
 
+		@SuppressWarnings("unchecked")
 		List<AdminProd> listeAdmin = query.getResultList();
 
 		if (listeAdmin.size() != 0) {
@@ -124,6 +125,7 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 
 		Query q = em.createQuery(req);
 
+		@SuppressWarnings("unchecked")
 		List<Produit> listProd = q.getResultList();
 
 		System.out.println(listProd);

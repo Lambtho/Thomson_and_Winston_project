@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import fr.adaming.dao.ClientDaoImpl;
 import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Client;
-import fr.adaming.entities.Commande;
 import fr.adaming.entities.Produit;
 
 @Local

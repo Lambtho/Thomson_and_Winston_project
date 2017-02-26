@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import fr.adaming.dao.AdministrateurDaoImpl;
 import fr.adaming.entities.AdminProd;
 import fr.adaming.entities.Produit;
 

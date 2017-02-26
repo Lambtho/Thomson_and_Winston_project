@@ -11,7 +11,6 @@ import javax.persistence.Query;
 
 import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Client;
-import fr.adaming.entities.Commande;
 import fr.adaming.entities.Produit;
 
 /**
@@ -33,6 +32,7 @@ public class ClientDaoImpl implements IClientDao {
 
 		Query q = em.createQuery(req);
 
+		@SuppressWarnings("unchecked")
 		List<Categorie> listCat = q.getResultList();
 
 		System.out.println(listCat);
@@ -56,6 +56,7 @@ public class ClientDaoImpl implements IClientDao {
 		Query query = em.createNativeQuery(req, Produit.class);
 		query.setParameter("pId_cat", id_cat);
 
+		@SuppressWarnings("unchecked")
 		List<Produit> listeProd = query.getResultList();
 
 		System.out.println("------- Liste des produits par catégories------------");
@@ -76,6 +77,7 @@ public class ClientDaoImpl implements IClientDao {
 		Query query = em.createNativeQuery(req, Produit.class);
 		query.setParameter(1, produit.getIdProduit());
 
+		@SuppressWarnings("unchecked")
 		List<Produit> listeProdId = query.getResultList();
 
 		System.out.println("---- Liste des produits par Id------------");
@@ -96,6 +98,7 @@ public class ClientDaoImpl implements IClientDao {
 		Query query = em.createNativeQuery(sqlReq, Produit.class);
 		query.setParameter(1, "%"+keyWord+"%");
 
+		@SuppressWarnings("unchecked")
 		List<Produit> listeProd = query.getResultList();
 
 		System.out.println("------- Liste des produits par mot clés------------");
