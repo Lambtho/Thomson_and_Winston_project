@@ -28,7 +28,7 @@ public class Categorie implements Serializable {
 	@Column(name = "description_cat")
 	private String description;
 	
-	@OneToMany(mappedBy="categorie", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="categorie")
 	private List<Produit> listeProduits;
 
 	// Constructeurs

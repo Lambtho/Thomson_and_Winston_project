@@ -43,7 +43,7 @@ public class ClientManagedBean implements Serializable {
 	List<Commande> listeCommande;
 
 	String indexCat;
-	String recherche;
+	String recherche="";
 
 	public ClientManagedBean() {
 		client = new Client();
@@ -135,11 +135,20 @@ public class ClientManagedBean implements Serializable {
 	@PostConstruct
 	public void getAllCategories() {
 		this.listeCategories = clientService.getAllCategories();
-		this.listeProduits = clientService.getProductByKeyWordService("");
+		System.out.println("=================**>"+this.listeProduits);
+		this.listeProduits = clientService.getProductByKeyWordService(this.recherche);
+		System.out.println("=================**>"+this.listeProduits);
 	}
 
 	public void getAllProd() {
 		this.listeProduits = clientService.getProductByKeyWordService("");
+	}
+	
+	public void getProd() {
+		System.out.println("=================+>"+this.listeProduits);
+		this.listeProduits = clientService.getProductByKeyWordService(this.recherche);
+		System.out.println("=================+>"+this.listeProduits);
+
 	}
 
 	public void getCart() {
@@ -148,20 +157,17 @@ public class ClientManagedBean implements Serializable {
 		for(LigneCommande lc:llcmd){
 			this.listeProduits.add(lc.getProduit());
 		}
-		
-		System.out.println("==============================>" + this.listeProduits);
 	}
-
+	
 	public String getProdByCat() {
-		System.out.println("index cliqué============================================>" + this.indexCat);
 		this.listeProduits = clientService.getProductByCatService(Integer.parseInt(this.indexCat));
-		System.out.println("liste produits =======================>" + listeProduits);
 		return null;
 	}
 
 	public String getByKeyWord() {
-		this.listeProduits = clientService.getProductByKeyWordService(recherche);
-		return null;
+		this.listeProduits = clientService.getProductByKeyWordService(this.recherche);
+		System.out.println(this.listeProduits);
+		return "Recherche";
 	}
 
 	public String order() {
@@ -174,6 +180,36 @@ public class ClientManagedBean implements Serializable {
 		this.client.setListeCommande(listCmd);
 		clientService.orderService(client);
 		// débiter les stocks
+		for(LigneCommande lc : this.listeLignesCmd){
+			
+			Produit p = new Produit();
+			p = lc.getProduit();
+			int quantt = p.getQuantite();
+			
+			int quanttStock = clientService.getProductByIdService(p).get(0).getQuantite();
+			System.out.println("///////////////////////////////////////////////////////////////////////");
+			System.out.println("quantt =>"+quantt);
+			System.out.println("quanttStock =>"+quanttStock);
+			p.setQuantite(quanttStock-quantt);
+			System.out.println(p);
+			int verif = adminService.updateProductService(p);
+			System.out.println("verif"+verif);
+		}
+
+		client = new Client();
+		produit = new Produit();
+		categorie = new Categorie();
+		ligneCommande = new LigneCommande();
+		commande = new Commande(Calendar.getInstance());
+		listeProduitsCmd = new ArrayList<Produit>();
+		listeLignesCmd = new ArrayList<LigneCommande>();
+		listeCommande = new ArrayList<Commande>();
+		this.produit.setListeLigneCommandes(listeLignesCmd);
+		this.commande.setListeLignesCommandes(listeLignesCmd);
+		this.client.setListeCommande(listeCommande);
+		
+		listeProduits = clientService.getProductByKeyWordService("");
+		
 		return "Accueil";
 	}
 

@@ -15,61 +15,57 @@
 	<ui:insert>
 		<ui:include src="/resources/Templates/headerClient.xhtml" />
 	</ui:insert>
+	<div class="menuCategories">
+		<h:form>
+			<h:inputText value="#{clientMB.recherche}" />
+			<p:commandButton action="#{clientMB.getByKeyWord}" value="Rechercher"
+				update="@all" />
+		</h:form>
+		<h:form>
+			<p:dataTable var="produit" value="#{clientMB.listeProduits}">
+				<p:column headerText="Id">
+					<h:outputText value="#{produit.idProduit}" />
+				</p:column>
+				<p:column headerText="Désignation">
+					<h:outputText value="#{produit.designation}" />
+				</p:column>
+				<p:column headerText="Description">
+					<h:outputText value="#{produit.description}" />
+				</p:column>
+				<p:column headerText="Prix">
+					<h:outputText value="#{produit.prix}" />
+				</p:column>
+				<p:column headerText="Quantité">
+					<h:outputText value="#{produit.quantite}" />
+				</p:column>
+				<p:column headerText="Selection">
+					<h:outputText value="#{produit.selectionne}" />
+				</p:column>
+				<p:column headerText="Catégorie">
+					<h:outputText value="#{produit.categorie.nomCategorie}" />
+				</p:column>
+				<p:column headerText="Quantité">
+					<h:inputText value="#{produit.quantite}" required="true"
+						id="saisieQtt">
+						<f:convertNumber type="number" integerOnly="true" />
+						<!-- 						<f:validateLongRange minimum="1" maximum="#{produit.quantite}"/> -->
+					</h:inputText>
+					<!-- 				mettre un validator pour controller sue c'est un entier et < à la quantité -->
+				</p:column>
+				<p:column>
 
-	<h:form>
-		<h:inputText value="#{clientMB.recherche}" />
-		<p:commandButton action="#{clientMB.getByKeyWord}" value="Rechercher" update="@all"/>
-	</h:form>
-<!-- 	 <p:outputLabel for="ac" value="AutoComplete"/> -->
-<!--         <p:autoComplete id="ac" completeMethod="#{autoCompleteView.completeText}" /> -->
- 
+					<h:commandButton action="#{clientMB.selectProduct}"
+						value="Ajouter au panier">
+						<f:setPropertyActionListener value="#{produit}"
+							target="#{clientMB.produit}" />
+					</h:commandButton>
+				</p:column>
+			</p:dataTable>
 
-	<p:dataTable var="produit" value="#{clientMB.listeProduits}">
-		<p:column headerText="Id">
-			<h:outputText value="#{produit.idProduit}" />
-		</p:column>
-		<p:column headerText="Désignation">
-			<h:outputText value="#{produit.designation}" />
-		</p:column>
-		<p:column headerText="Description">
-			<h:outputText value="#{produit.description}" />
-		</p:column>
-		<p:column headerText="Prix">
-			<h:outputText value="#{produit.prix}" />
-		</p:column>
-		<p:column headerText="Quantité">
-			<h:outputText value="#{produit.quantite}" />
-		</p:column>
-		<p:column headerText="Selection">
-			<h:outputText value="#{produit.selectionne}" />
-		</p:column>
-		<p:column headerText="Catégorie">
-			<h:outputText value="#{produit.categorie.nomCategorie}" />
-		</p:column>
-	</p:dataTable>
-
-	<!-- 	<p:accordionPanel> -->
-	<!--         <p:tab title="Godfather Part I"> -->
-	<!--             <h:panelGrid columns="2" cellpadding="10"> -->
-	<!--                 <p:graphicImage name="demo/images/godfather/godfather1.jpg" /> -->
-	<!--                 <h:outputText -->
-	<!--                     value="The story begins as Don Vito Corleone..." /> -->
-	<!--             </h:panelGrid> -->
-	<!--         </p:tab> -->
-	<!--         <p:tab title="Godfather Part II"> -->
-	<!--             <h:panelGrid columns="2" cellpadding="10"> -->
-	<!--                 <p:graphicImage name="demo/images/godfather/godfather2.jpg" /> -->
-	<!--                 <h:outputText value="Francis Ford Coppola's legendary..." /> -->
-	<!--             </h:panelGrid> -->
-	<!--         </p:tab> -->
-	<!--         <p:tab title="Godfather Part III"> -->
-	<!--             <h:panelGrid columns="2" cellpadding="10"> -->
-	<!--                 <p:graphicImage name="demo/images/godfather/godfather3.jpg" /> -->
-	<!--                 <h:outputText value="After a break of more than 15 years..." /> -->
-	<!--             </h:panelGrid> -->
-	<!--         </p:tab> -->
-	<!--     </p:accordionPanel> -->
-
-
+			<h:messages />
+		</h:form>
+	</div>
+	<div class="produits"></div>
+	<div class="footer"></div>
 </h:body>
 </html>
