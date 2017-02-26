@@ -201,7 +201,6 @@ public class ClientManagedBean implements Serializable {
 //		this.produit.setListeCommandes(listeCommandes);
 
 		
-		
 		// Ajout des lignes de commande et des produits dans la commande
 		this.commande.setListeLignesCommandes(listeLignesCmd);
 		this.commande.setListeProduits(listeProduitsCmd);
