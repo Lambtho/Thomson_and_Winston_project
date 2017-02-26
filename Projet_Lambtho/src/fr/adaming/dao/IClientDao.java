@@ -20,6 +20,6 @@ public interface IClientDao {
 	
 	public List<Produit> getProductByKeyWord (String keyWord);
 	
-	public int  order(Client client, Commande commande);
+	public int  order(Client client);
 
 }

@@ -21,6 +21,6 @@ public interface IClientService {
 	
 	public List<Produit> getProductByKeyWordService (String keyWord);
 	
-	public int  orderService(Client client, Commande commande);
+	public int  orderService(Client client);
 
 }

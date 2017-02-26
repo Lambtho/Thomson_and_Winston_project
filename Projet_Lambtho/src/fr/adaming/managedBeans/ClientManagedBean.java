@@ -172,7 +172,7 @@ public class ClientManagedBean implements Serializable {
 		listCmd = this.client.getListeCommande();
 		listCmd.add(this.commande);
 		this.client.setListeCommande(listCmd);
-		clientService.orderService(client, commande);
+		clientService.orderService(client);
 		// débiter les stocks
 		return "Accueil";
 	}
@@ -212,7 +212,7 @@ public class ClientManagedBean implements Serializable {
 		 System.out.println(lc1.getProduit());
 		 }
 		 for (LigneCommande lc2 : commande.getListeLignesCommandes()) {
-		 System.out.println(lc);
+		 System.out.println(lc2);
 		 }
 		 System.out.println(
 		 "====================================================================================================================");

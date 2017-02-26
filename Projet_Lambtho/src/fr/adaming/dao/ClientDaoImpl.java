@@ -96,14 +96,13 @@ public class ClientDaoImpl implements IClientDao {
 	}
 
 	@Override
-	public int order(Client client, Commande commande) {
+	public int order(Client client) {
 		
 		int verif=1;
 		
 		try{
 		
-//			em.persist(client);
-			em.persist(commande);
+			em.persist(client);
 			
 			
 		}catch (PersistenceException e){

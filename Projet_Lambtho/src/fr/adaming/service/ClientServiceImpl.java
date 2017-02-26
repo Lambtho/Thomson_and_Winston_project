@@ -43,9 +43,9 @@ public class ClientServiceImpl implements IClientService {
 	}
 
 	@Override
-	public int orderService(Client client, Commande commande) {
+	public int orderService(Client client) {
 		
-		return clientDao.order(client, commande);
+		return clientDao.order(client);
 	}
 
 }
