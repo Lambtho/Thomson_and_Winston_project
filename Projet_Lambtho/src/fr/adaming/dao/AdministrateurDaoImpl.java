@@ -11,12 +11,19 @@ import javax.persistence.Query;
 import fr.adaming.entities.AdminProd;
 import fr.adaming.entities.Produit;
 
+/**
+ * La Classe d'implémentation de {@link IAdministrateurDao}
+ * @author Thomas et lambert
+ *
+ */
+
 @Stateless
 public class AdministrateurDaoImpl implements IAdministrateurDao {
 
 	@PersistenceContext(unitName = "PU_TP")
 	EntityManager em;
 
+	
 	@Override
 	public AdminProd isExist(AdminProd admin) {
 
@@ -39,7 +46,8 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 		}
 
 	}
-
+	
+	
 	@Override
 	public int addProduct(Produit prod) {
 
@@ -57,6 +65,7 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 
 		return verif;
 	}
+	
 
 	@Override
 	public int delProduct(long id_prod) {
@@ -79,7 +88,8 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 
 		return verif;
 	}
-
+	
+	
 	@Override
 	public int updateProduct(Produit prod) {
 
@@ -106,7 +116,7 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 
 		return verif;
 	}
-
+	
 	@Override
 	public List<Produit> getAllProduct() {
 
@@ -127,6 +137,8 @@ public class AdministrateurDaoImpl implements IAdministrateurDao {
 			return null;
 		}
 	}
+	
+	
 
 	@Override
 	public Produit getByIdProduct(long id_prod) {

@@ -9,11 +9,7 @@ import fr.adaming.entities.Client;
 import fr.adaming.entities.Commande;
 import fr.adaming.entities.Produit;
 
-/**
- * @see IClientDao
- * @author Thomas et Lambert
- *
- */
+
 
 
 @Local

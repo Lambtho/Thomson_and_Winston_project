@@ -11,6 +11,11 @@ import fr.adaming.entities.Client;
 import fr.adaming.entities.Commande;
 import fr.adaming.entities.Produit;
 
+/**
+ * La Classe d'implémentation de {@link IClientService}
+ * @author Thomas et lambert
+ *
+ */
 @Stateless
 public class ClientServiceImpl implements IClientService {
 	

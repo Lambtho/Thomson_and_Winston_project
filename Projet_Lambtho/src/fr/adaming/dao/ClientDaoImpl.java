@@ -15,7 +15,7 @@ import fr.adaming.entities.Commande;
 import fr.adaming.entities.Produit;
 
 /**
- * @see IClientDao
+ * La Classe d'implémentation de {@link IClientDao}
  * @author Thomas et lambert
  *
  */
