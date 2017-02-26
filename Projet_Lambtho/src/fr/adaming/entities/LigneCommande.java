@@ -17,7 +17,7 @@ public class LigneCommande implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	//Attributs
+	// Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_lcmd")
@@ -26,12 +26,16 @@ public class LigneCommande implements Serializable {
 	private int quantite;
 	@Column(name = "prix_lcmd")
 	private double prix;
+
+	@ManyToOne
+	@JoinColumn(name = "id_cmd_fk", referencedColumnName = "id_cmd")
+	private Commande commande;
 	
 	@ManyToOne
-	@JoinColumn(name="id_cmd_fk", referencedColumnName="id_cmd")
-	private Commande commande;
+	@JoinColumn(name = "id_prod_fk", referencedColumnName = "id_prd")
+	private Produit produit;
 
-	//Constructeurs
+	// Constructeurs
 	public LigneCommande() {
 		super();
 	}
@@ -49,7 +53,7 @@ public class LigneCommande implements Serializable {
 		this.prix = prix;
 	}
 
-	//Getters & Setters
+	// Getters & Setters
 	public long getId_ligneCommande() {
 		return id_ligneCommande;
 	}
@@ -72,6 +76,24 @@ public class LigneCommande implements Serializable {
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	public Commande getCommande() {
+		return commande;
+	}
+
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
+	
+	
+
+	public Produit getProduit() {
+		return produit;
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
 	}
 
 	@Override

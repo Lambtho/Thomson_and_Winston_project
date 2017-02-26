@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -41,10 +42,11 @@ public class Produit implements Serializable {
 	private Categorie categorie;
 
 	@ManyToMany
-	@JoinTable(name = "table_jointure_prod_cmd",
-	joinColumns = @JoinColumn(name = "id_cmd"),
-	inverseJoinColumns = @JoinColumn(name = "id_prd"))
+	@JoinTable(name = "table_jointure_prod_cmd", joinColumns = @JoinColumn(name = "id_cmd"), inverseJoinColumns = @JoinColumn(name = "id_prd"))
 	private List<Commande> listeCommandes;
+
+	@OneToMany(mappedBy = "produit")
+	private List<LigneCommande> listeLigneCommandes;
 
 	// Constructeurs
 
@@ -121,13 +123,28 @@ public class Produit implements Serializable {
 		this.selectionne = selectionne;
 	}
 
-	
 	public Categorie getCategorie() {
 		return categorie;
 	}
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+
+	public List<Commande> getListeCommandes() {
+		return listeCommandes;
+	}
+
+	public void setListeCommandes(List<Commande> listeCommandes) {
+		this.listeCommandes = listeCommandes;
+	}
+
+	public List<LigneCommande> getListeLigneCommandes() {
+		return listeLigneCommandes;
+	}
+
+	public void setListeLigneCommandes(List<LigneCommande> listeLigneCommandes) {
+		this.listeLigneCommandes = listeLigneCommandes;
 	}
 
 	@Override

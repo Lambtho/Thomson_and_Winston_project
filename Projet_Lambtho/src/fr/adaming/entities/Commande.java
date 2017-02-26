@@ -28,17 +28,17 @@ public class Commande implements Serializable {
 	private long idCommande;
 	@Column(name = "date_cmd")
 	private Calendar dateCommande;
-	
-	@ManyToMany(mappedBy="listeCommandes", cascade=CascadeType.ALL)
+
+	@ManyToMany(mappedBy = "listeCommandes", cascade = CascadeType.ALL)
 	private List<Produit> listeProduits;
-	
-	@ManyToOne 
-	@JoinColumn (name="id_cl_fk", referencedColumnName="id_cl")
+
+	@ManyToOne
+	@JoinColumn(name = "id_cl_fk", referencedColumnName = "id_cl")
 	private Client client;
 
-	@OneToMany(mappedBy="commande")
+	@OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
 	private List<LigneCommande> listeLignesCommandes;
-	
+
 	// Constructeurs
 	public Commande() {
 		super();
@@ -70,6 +70,30 @@ public class Commande implements Serializable {
 
 	public void setDateCommande(Calendar dateCommande) {
 		this.dateCommande = dateCommande;
+	}
+
+	public List<Produit> getListeProduits() {
+		return listeProduits;
+	}
+
+	public void setListeProduits(List<Produit> listeProduits) {
+		this.listeProduits = listeProduits;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public List<LigneCommande> getListeLignesCommandes() {
+		return listeLignesCommandes;
+	}
+
+	public void setListeLignesCommandes(List<LigneCommande> listeLignesCommandes) {
+		this.listeLignesCommandes = listeLignesCommandes;
 	}
 
 	@Override

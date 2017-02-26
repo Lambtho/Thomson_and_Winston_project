@@ -7,15 +7,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>Accueil</title>
+	<title>Panier</title>
 	<h:outputStylesheet library="css" name="style.css" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
 <h:body>
-	<f:event type="preRenderView" listener="#{clientMB.getAllProd}" />
-	<h1>Accueil</h1>
+	<f:event type="preRenderView" listener="#{clientMB.getCart}" />
+	<h1>Panier</h1>
 	<div class="header">
 		<ui:insert>
 			<ui:include src="/resources/Templates/headerClient.xhtml" />
@@ -46,25 +46,15 @@
 				<p:column headerText="Catégorie">
 					<h:outputText value="#{produit.categorie.nomCategorie}" />
 				</p:column>
-				<p:column headerText="Quantité">
-					<h:inputText value="#{produit.quantite}" required="true"
-						id="saisieQtt">
-						<f:convertNumber type="number" integerOnly="true" />
-						<!-- 						<f:validateLongRange minimum="1" maximum="#{produit.quantite}"/> -->
-					</h:inputText>
-					<!-- 				mettre un validator pour controller sue c'est un entier et < à la quantité -->
-				</p:column>
 				<p:column>
-
 					<h:commandButton action="#{clientMB.selectProduct}"
-						value="Ajouter au panier">
+						value="Supprimer">
 						<f:setPropertyActionListener value="#{produit}"
 							target="#{clientMB.produit}" />
 					</h:commandButton>
 				</p:column>
 			</p:dataTable>
-
-			<h:messages />
+			<h:commandButton value="Passer la commande" />
 		</h:form>
 	</div>
 	<div class="produits"></div>

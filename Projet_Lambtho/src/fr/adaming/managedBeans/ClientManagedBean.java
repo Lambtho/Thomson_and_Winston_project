@@ -1,6 +1,7 @@
 package fr.adaming.managedBeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import fr.adaming.entities.Client;
 import fr.adaming.entities.Commande;
 import fr.adaming.entities.LigneCommande;
 import fr.adaming.entities.Produit;
+import fr.adaming.service.IAdministrateurService;
 import fr.adaming.service.IClientService;
 
 @ManagedBean(name = "clientMB")
@@ -24,6 +26,9 @@ public class ClientManagedBean implements Serializable {
 
 	@EJB
 	IClientService clientService;
+
+	@EJB
+	IAdministrateurService adminService;
 
 	Client client;
 	Produit produit;
@@ -45,6 +50,8 @@ public class ClientManagedBean implements Serializable {
 		categorie = new Categorie();
 		ligneCommande = new LigneCommande();
 		commande = new Commande(Calendar.getInstance());
+		listeProduitsCmd = new ArrayList<Produit>();
+		listeLignesCmd = new ArrayList<LigneCommande>();
 	}
 
 	public Client getClient() {
@@ -123,7 +130,16 @@ public class ClientManagedBean implements Serializable {
 	@PostConstruct
 	public void getAllCategories() {
 		this.listeCategories = clientService.getAllCategories();
-		this.listeProduits = clientService.getProductByKeyWordService("a");
+		this.listeProduits = clientService.getProductByKeyWordService("");
+	}
+
+	public void getAllProd() {
+		this.listeProduits = clientService.getProductByKeyWordService("");
+	}
+
+	public void getCart() {
+		this.listeProduits = this.commande.getListeProduits();
+		System.out.println("==============================>" + this.listeProduits);
 	}
 
 	public String getProdByCat() {
@@ -132,15 +148,72 @@ public class ClientManagedBean implements Serializable {
 		System.out.println("liste produits =======================>" + listeProduits);
 		return null;
 	}
-	
-	public String getByKeyWord(){
+
+	public String getByKeyWord() {
 		this.listeProduits = clientService.getProductByKeyWordService(recherche);
 		return null;
 	}
 	
-	public String selectProduct(){
+//	public String order(){
+//		clientService.orderService(client, commande)
+//		this.commande
+//	}
+
+	public String selectProduct() {
+
+		int ajout = 0;
+
+		for (int i = 0; i < listeLignesCmd.size() - 1; i++) {
+			LigneCommande lc = listeLignesCmd.get(i);
+			Produit p = lc.getProduit();
+			System.out.println(p.getIdProduit());
+			System.out.println(this.produit.getIdProduit());
+
+			if (p.getIdProduit() == this.produit.getIdProduit()) {
+				this.listeLignesCmd.remove(lc);
+				System.out.println("coucou");
+				int quantt = lc.getQuantite() + this.produit.getQuantite();
+				lc.setQuantite(quantt);
+				lc.setPrix(quantt * this.produit.getPrix());
+
+				this.listeLignesCmd.get(i).setPrix(lc.getPrix());
+				this.listeLignesCmd.get(i).setQuantite(quantt);
+				ajout = 1;
+				break;
+			}
+		}
+
+		if (ajout == 0) {
+			LigneCommande lcmd = new LigneCommande();
+			lcmd.setProduit(this.produit);
+			lcmd.setQuantite(this.produit.getQuantite());
+			double prix = this.produit.getPrix() * this.produit.getQuantite();
+			lcmd.setPrix(prix);
+			this.listeLignesCmd.add(lcmd);
+		}
+
+		// Le produit est sélectionné
+		this.produit.setSelectionne(true);
+		// Ajout du produit dans une liste
 		this.listeProduitsCmd.add(this.produit);
-//		this.listeLignesCmd.add(e)
+
+		// Ajout des lignes de commande et des produits dans la commande
+		this.commande.setListeLignesCommandes(listeLignesCmd);
+		this.commande.setListeProduits(listeProduitsCmd);
+		// System.out.println(
+		// "====================================================================================================================");
+		// System.out.println(commande);
+		// for (Produit p : commande.getListeProduits()) {
+		// System.out.println(p);
+		// }
+		// for (LigneCommande lc : commande.getListeLignesCommandes()) {
+		// System.out.println(lc);
+		// }
+		// System.out.println(
+		// "====================================================================================================================");
+
+		// Regeneration de la liste de produits
+		listeProduits = clientService.getProductByKeyWordService("");
 		return null;
 	}
 }
