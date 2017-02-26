@@ -18,6 +18,7 @@ import fr.adaming.entities.Produit;
 import fr.adaming.service.IAdministrateurService;
 import fr.adaming.service.IClientService;
 
+
 @ManagedBean(name = "clientMB")
 @SessionScoped
 public class ClientManagedBean implements Serializable {
