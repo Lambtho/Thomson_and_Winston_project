@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,14 +30,14 @@ public class Commande implements Serializable {
 	@Column(name = "date_cmd")
 	private Calendar dateCommande;
 
-	@ManyToMany(mappedBy = "listeCommandes", cascade = CascadeType.ALL)
-	private List<Produit> listeProduits;
+//	@ManyToMany(mappedBy = "listeCommandes", cascade = CascadeType.ALL)
+//	private List<Produit> listeProduits;
 
 	@ManyToOne
 	@JoinColumn(name = "id_cl_fk", referencedColumnName = "id_cl")
 	private Client client;
 
-	@OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<LigneCommande> listeLignesCommandes;
 
 	// Constructeurs
@@ -72,13 +73,13 @@ public class Commande implements Serializable {
 		this.dateCommande = dateCommande;
 	}
 
-	public List<Produit> getListeProduits() {
-		return listeProduits;
-	}
-
-	public void setListeProduits(List<Produit> listeProduits) {
-		this.listeProduits = listeProduits;
-	}
+//	public List<Produit> getListeProduits() {
+//		return listeProduits;
+//	}
+//
+//	public void setListeProduits(List<Produit> listeProduits) {
+//		this.listeProduits = listeProduits;
+//	}
 
 	public Client getClient() {
 		return client;

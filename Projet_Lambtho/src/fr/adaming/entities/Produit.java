@@ -3,8 +3,10 @@ package fr.adaming.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,11 +43,11 @@ public class Produit implements Serializable {
 	@JoinColumn(name = "categorie_id_fk", referencedColumnName = "id_cat")
 	private Categorie categorie;
 
-	@ManyToMany
-	@JoinTable(name = "table_jointure_prod_cmd", joinColumns = @JoinColumn(name = "id_cmd"), inverseJoinColumns = @JoinColumn(name = "id_prd"))
-	private List<Commande> listeCommandes;
+//	@ManyToMany
+//	@JoinTable(name = "table_jointure_prod_cmd", joinColumns = @JoinColumn(name = "id_cmd"), inverseJoinColumns = @JoinColumn(name = "id_prd"))
+//	private List<Commande> listeCommandes;
 
-	@OneToMany(mappedBy = "produit")
+	@OneToMany(mappedBy = "produit", cascade=CascadeType.ALL, fetch=FetchType.EAGER )
 	private List<LigneCommande> listeLigneCommandes;
 
 	// Constructeurs
@@ -131,13 +133,13 @@ public class Produit implements Serializable {
 		this.categorie = categorie;
 	}
 
-	public List<Commande> getListeCommandes() {
-		return listeCommandes;
-	}
-
-	public void setListeCommandes(List<Commande> listeCommandes) {
-		this.listeCommandes = listeCommandes;
-	}
+//	public List<Commande> getListeCommandes() {
+//		return listeCommandes;
+//	}
+//
+//	public void setListeCommandes(List<Commande> listeCommandes) {
+//		this.listeCommandes = listeCommandes;
+//	}
 
 	public List<LigneCommande> getListeLigneCommandes() {
 		return listeLigneCommandes;

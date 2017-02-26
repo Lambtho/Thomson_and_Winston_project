@@ -40,6 +40,7 @@ public class ClientManagedBean implements Serializable {
 	List<Produit> listeProduits;
 	List<LigneCommande> listeLignesCmd;
 	List<Produit> listeProduitsCmd;
+	List<Commande> listeCommande;
 
 	String indexCat;
 	String recherche;
@@ -52,6 +53,10 @@ public class ClientManagedBean implements Serializable {
 		commande = new Commande(Calendar.getInstance());
 		listeProduitsCmd = new ArrayList<Produit>();
 		listeLignesCmd = new ArrayList<LigneCommande>();
+		listeCommande = new ArrayList<Commande>();
+		this.produit.setListeLigneCommandes(listeLignesCmd);
+		this.commande.setListeLignesCommandes(listeLignesCmd);
+		this.client.setListeCommande(listeCommande);
 	}
 
 	public Client getClient() {
@@ -138,7 +143,12 @@ public class ClientManagedBean implements Serializable {
 	}
 
 	public void getCart() {
-		this.listeProduits = this.commande.getListeProduits();
+		List<LigneCommande> llcmd = this.commande.getListeLignesCommandes();
+		this.listeProduits.clear();
+		for(LigneCommande lc:llcmd){
+			this.listeProduits.add(lc.getProduit());
+		}
+		
 		System.out.println("==============================>" + this.listeProduits);
 	}
 
@@ -155,66 +165,57 @@ public class ClientManagedBean implements Serializable {
 	}
 
 	public String order() {
+		
+		this.commande.setClient(this.client);		
+		
 		List<Commande> listCmd = new ArrayList<Commande>();
 		listCmd = this.client.getListeCommande();
 		listCmd.add(this.commande);
 		this.client.setListeCommande(listCmd);
-		this.commande.setClient(this.client);
 		clientService.orderService(client, commande);
-//		débiter les stocks
+		// débiter les stocks
 		return "Accueil";
 	}
 
 	public String selectProduct() {
 
+		// Ajout du produit & de la commande dans la ligne commande
+		LigneCommande lc = new LigneCommande();
+		lc.setProduit(this.produit);
+		lc.setCommande(this.commande);
+		int quantite = this.produit.getQuantite();
+		double prix = quantite * this.produit.getPrix();
+		lc.setPrix(prix);
+		lc.setQuantite(quantite);
+
+		// Ajout de la ligne commande dans le produit
 		List<LigneCommande> llcmd = new ArrayList<LigneCommande>();
-		for (int i = 0; i < listeLignesCmd.size(); i++) {
-			LigneCommande lc = listeLignesCmd.get(i);
-			Produit p = lc.getProduit();
-			System.out.println("+++++++++++++++++++>" + p.getIdProduit());
-			System.out.println("+++++++++++++++++++>" + this.produit.getIdProduit());
+		llcmd = this.produit.getListeLigneCommandes();
+		llcmd.add(lc);
+		this.produit.setListeLigneCommandes(llcmd);
 
-			if (p.getIdProduit() == this.produit.getIdProduit()) {
+		// Ajout de la ligne commande dans la commande
+		
 
-				System.out.println("coucou");
-				int quantt = lc.getQuantite() + this.produit.getQuantite();
-				lc.setQuantite(quantt);
-				lc.setPrix(quantt * this.produit.getPrix());
-
-				break;
-			}
-			lc.setCommande(commande);
-			lc.setProduit(produit);
-			llcmd.add(lc);
-		}
-		this.listeLignesCmd.clear();
-		this.listeLignesCmd = llcmd;
+		llcmd = this.commande.getListeLignesCommandes();
+		llcmd.add(lc);
+		this.commande.setListeLignesCommandes(llcmd);
 
 		// Le produit est sélectionné
 		this.produit.setSelectionne(true);
-		// Ajout du produit dans une liste
-		this.listeProduitsCmd.add(this.produit);
-		
-		
-		List<Commande> lcmd = new ArrayList<>();
-		this.produit.getListeCommandes();
-//		this.produit.setListeCommandes(listeCommandes);
 
 		
-		// Ajout des lignes de commande et des produits dans la commande
-		this.commande.setListeLignesCommandes(listeLignesCmd);
-		this.commande.setListeProduits(listeProduitsCmd);
-		// System.out.println(
-		// "====================================================================================================================");
-		// System.out.println(commande);
-		// for (Produit p : commande.getListeProduits()) {
-		// System.out.println(p);
-		// }
-		// for (LigneCommande lc : commande.getListeLignesCommandes()) {
-		// System.out.println(lc);
-		// }
-		// System.out.println(
-		// "====================================================================================================================");
+		 System.out.println(
+		 "====================================================================================================================");
+		 System.out.println(commande);
+		 for (LigneCommande lc1 : commande.getListeLignesCommandes()) {
+		 System.out.println(lc1.getProduit());
+		 }
+		 for (LigneCommande lc2 : commande.getListeLignesCommandes()) {
+		 System.out.println(lc);
+		 }
+		 System.out.println(
+		 "====================================================================================================================");
 
 		// Regeneration de la liste de produits
 		listeProduits = clientService.getProductByKeyWordService("");
