@@ -68,7 +68,7 @@ public class ClientDaoImpl implements IClientDao {
 
 		List<Produit> listeProdId = query.getResultList();
 
-		System.out.println("------- Liste des produits par panier------------");
+		System.out.println("---- Liste des produits par panier------------");
 
 		for (Produit p : listeProdId) {
 			System.out.println(p);
