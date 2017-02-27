@@ -10,12 +10,12 @@
 	<title>Passer commande</title>
 	<h:outputStylesheet library="css" name="style.css" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-3.1.1.js" />
 	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
-<h:body>
+<h:body styleClass="hbody">
 	<f:event type="preRenderView" listener="#{clientMB.getCart}" />
-	<h1>Passer Commande</h1>
 	<div class="header">
 		<ui:insert>
 			<ui:include src="/resources/Templates/headerClient.xhtml" />
@@ -23,8 +23,8 @@
 	</div>
 	<div class="barreRecherche"></div>
 	<div class="menuCategories">
-		<h:form>
-			<h2>Saisie de vos informations personnelles</h2>
+		<h:form styleClass="produits">
+			<h2 class="titre3">Saisie de vos informations personnelles</h2>
 			<h:panelGrid columns="3">
 				<h:outputText value="Nom : " />
 				<h:inputText id="nom_id" value="#{clientMB.client.nomClient}"
@@ -52,9 +52,14 @@
 				</h:panelGrid>
 			<h:commandButton value="Acheter" action="#{clientMB.order}" />
 		</h:form>
+		<br/>
 	</div>
 	<div class="produits"></div>
-	<div class="footer"></div>
+	<div class="footer">
+	<ui:insert>
+			<ui:include src="/resources/Templates/footerClient.xhtml" />
+		</ui:insert>
+	</div>
 
 </h:body>
 </html>

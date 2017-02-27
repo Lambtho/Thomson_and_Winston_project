@@ -1,0 +1,151 @@
+@CHARSET "ISO-8859-1";
+
+.vague {
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-image: url("/Projet_Lambtho/resources/images/vague.jpg");
+}
+
+.hbody {
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-image: url("/Projet_Lambtho/resources/images/okinawa.jpg");
+	background-attachment: fixed;
+}
+
+.titre {
+	width: 100%;
+	height: 100px;
+	text-align: center;
+	color: gold;
+	margin-top: 120px;
+	font-family: fantasy;
+	font-size: 75px;
+}
+.titre2 {
+	width: 100%;
+	height: 80px;
+	text-align: center;
+	color: rgb(0,10,125);
+	margin-top: 10px;
+	margin-bottom:-25px;
+	font-family: fantasy;
+	font-size: 40px;
+}
+
+.titre3 {
+	width: 100%;
+	height: 80px;
+	color: rgb(53,58,255);
+	margin-top: 10px;
+	margin-bottom:-40px;
+	font-family: fantasy;
+	font-size: 20px;
+}
+.titre4 {
+	width: 100%;
+	height: 80px;
+	color: rgb(53,58,255);
+	margin-top: 10px;
+	margin-bottom:-40px;
+	font-family: fantasy;
+	font-size: 20px;
+	text-align: center;
+}
+.header{
+	width: 80%;
+	margin-left: 10%;
+}
+.produits{
+	width: 80%;
+	margin-top: 10px;
+	margin-left: 10%;
+	
+}
+.jumb {
+	width: 60%;
+	margin-top: -20px;
+	margin-left: 20%;
+	height: 220px;
+}
+
+.barreRecherche{
+	margin: 10px 0 10px 30%;
+	width: 60%;
+}
+
+.barre{
+	width : 40%;
+}
+.coloneId{
+	width: 5%;
+}
+.coloneDesination{
+	width: 18%;
+}
+.coloneDescription{
+	width: 18%;
+}
+.colonePrix{
+	width:8%;
+}
+.coloneQuantite{
+	width: 0%;
+}
+.coloneSelection{
+	width: 0%;
+}
+.coloneCategorie{
+	width: 12%;
+}
+.coloneQuantiteSelect{
+	width: 8%;
+}
+.inputQtt{
+	width: 80%;
+}
+.coloneSelect{
+	width: 9%;
+}
+.boutonSelect{
+	width: 90%;
+}
+
+.footer{
+	background-color: rgba(255,255,255,0.4);
+	border-radius: 5px;
+	text-align: center;
+	margin-top: 10px;
+	width: 80%;
+	margin-left: 10%;
+	border-top: solid 2px #A5A5A5;
+	font-family: monospace;
+	font-size: 15px;
+	color: rgb(0,10,125);
+}
+.categories{
+	position:absolute;
+	width: 25%;
+	margin-left: -8%;
+	margin-right: 20px;
+}
+
+.result{
+	position: relative;
+	width: 85%;
+	margin-left: 24%;
+}
+
+.footerbis{
+	background-color: rgba(255,255,255,0.4);
+	border-radius: 5px;
+	text-align: center;
+	margin-top: 10px;
+	width: 80%;
+	margin-left: 10%;
+	border-top: solid 2px #A5A5A5;
+	font-family: monospace;
+	font-size: 15px;
+	color: rgb(0,10,125);
+	margin-top: 30px;
+}

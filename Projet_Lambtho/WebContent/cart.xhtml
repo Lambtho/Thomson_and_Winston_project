@@ -10,12 +10,12 @@
 	<title>Panier</title>
 	<h:outputStylesheet library="css" name="style.css" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-3.1.1.js" />
 	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
-<h:body>
+<h:body styleClass="hbody">
 	<f:event type="preRenderView" listener="#{clientMB.getCart}" />
-	<h1>Panier</h1>
 	<div class="header">
 		<ui:insert>
 			<ui:include src="/resources/Templates/headerClient.xhtml" />
@@ -23,7 +23,7 @@
 	</div>
 	<div class="barreRecherche"></div>
 	<div class="menuCategories">
-		<h:form>
+		<h:form styleClass="produits">
 			<p:dataTable var="produit" value="#{clientMB.listeProduits}">
 				<p:column headerText="Id">
 					<h:outputText value="#{produit.idProduit}" />
@@ -58,7 +58,13 @@
 		</h:form>
 	</div>
 	<div class="produits"></div>
-	<div class="footer"></div>
+	<div class="footer">
+	
+	<ui:insert>
+			<ui:include src="/resources/Templates/footerClient.xhtml" />
+		</ui:insert>
+	</div>
+	
 
 </h:body>
 </html>

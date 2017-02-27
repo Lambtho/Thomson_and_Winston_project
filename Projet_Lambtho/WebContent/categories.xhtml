@@ -8,83 +8,77 @@
 
 <h:head>
 	<title>Index</title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-3.1.1.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
-<h:body>
-	<h1>Index</h1>
-	<ui:insert>
-		<ui:include src="/resources/Templates/headerClient.xhtml" />
-	</ui:insert>
+<h:body styleClass="hbody">
+	<div class="header">
+		<ui:insert>
+			<ui:include src="/resources/Templates/headerClient.xhtml" />
+		</ui:insert>
+	</div>
 
-	<!-- Mettre la selection des catégories sur le coté (genre menu) -->
-	<h:form>
-		<p:dataTable var="categories" value="#{clientMB.listeCategories}"
-			rowIndexVar="idLigne">
-			<p:column headerText="Id">
-				<h:outputText value="#{categories.idCategorie}" />
-			</p:column>
-			<p:column headerText="Nom">
-				<h:outputText value="#{categories.nomCategorie}" />
-			</p:column>
-			<p:column headerText="Description">
-				<h:outputText value="#{categories.description}" />
-			</p:column>
-			<p:column headerText="Afficher les produits">
-				<p:commandButton action="#{clientMB.getProdByCat}"
-					value="Visualiser les produits" update="@all">
-					<f:setPropertyActionListener value="#{categories.idCategorie}"
-						target="#{clientMB.indexCat}" />
-				</p:commandButton>
-			</p:column>
-		</p:dataTable>
-	</h:form>
-
-	<p:dataTable var="produit" value="#{clientMB.listeProduits}">
-		<p:column headerText="Id">
-			<h:outputText value="#{produit.idProduit}" />
-		</p:column>
-		<p:column headerText="Désignation">
-			<h:outputText value="#{produit.designation}" />
-		</p:column>
-		<p:column headerText="Description">
-			<h:outputText value="#{produit.description}" />
-		</p:column>
-		<p:column headerText="Prix">
-			<h:outputText value="#{produit.prix}" />
-		</p:column>
-		<p:column headerText="Quantité">
-			<h:outputText value="#{produit.quantite}" />
-		</p:column>
-		<p:column headerText="Selection">
-			<h:outputText value="#{produit.selectionne}" />
-		</p:column>
-		<p:column headerText="Catégorie">
-			<h:outputText value="#{produit.categorie.nomCategorie}" />
-		</p:column>
-	</p:dataTable>
-
-	<!-- 	<p:accordionPanel> -->
-	<!--         <p:tab title="Godfather Part I"> -->
-	<!--             <h:panelGrid columns="2" cellpadding="10"> -->
-	<!--                 <p:graphicImage name="demo/images/godfather/godfather1.jpg" /> -->
-	<!--                 <h:outputText -->
-	<!--                     value="The story begins as Don Vito Corleone..." /> -->
-	<!--             </h:panelGrid> -->
-	<!--         </p:tab> -->
-	<!--         <p:tab title="Godfather Part II"> -->
-	<!--             <h:panelGrid columns="2" cellpadding="10"> -->
-	<!--                 <p:graphicImage name="demo/images/godfather/godfather2.jpg" /> -->
-	<!--                 <h:outputText value="Francis Ford Coppola's legendary..." /> -->
-	<!--             </h:panelGrid> -->
-	<!--         </p:tab> -->
-	<!--         <p:tab title="Godfather Part III"> -->
-	<!--             <h:panelGrid columns="2" cellpadding="10"> -->
-	<!--                 <p:graphicImage name="demo/images/godfather/godfather3.jpg" /> -->
-	<!--                 <h:outputText value="After a break of more than 15 years..." /> -->
-	<!--             </h:panelGrid> -->
-	<!--         </p:tab> -->
-	<!--     </p:accordionPanel> -->
-
-
+	<div class="barreRecherche">
+		<h:form>
+			<h:inputText styleClass="barre" value="#{clientMB.recherche}" />
+			<p:commandButton action="#{clientMB.getByKeyWord}" value="Rechercher"
+				update="@all" />
+		</h:form>
+	</div>
+	<div class="produits">
+		<div class="categories">
+			<h:form>
+				<p:dataTable var="categories" value="#{clientMB.listeCategories}"
+					rowIndexVar="idLigne">
+					<p:column>
+						<h:outputText value="#{categories.nomCategorie}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{categories.description}" />
+					</p:column>
+					<p:column>
+						<p:commandButton action="#{clientMB.getProdByCat}"
+							value="Voir" update="@all">
+							<f:setPropertyActionListener value="#{categories.idCategorie}"
+								target="#{clientMB.indexCat}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</div>
+		<div class="result">
+			<p:dataTable var="produit" value="#{clientMB.listeProduits}">
+				<p:column headerText="Id">
+					<h:outputText value="#{produit.idProduit}" />
+				</p:column>
+				<p:column headerText="Désignation">
+					<h:outputText value="#{produit.designation}" />
+				</p:column>
+				<p:column headerText="Description">
+					<h:outputText value="#{produit.description}" />
+				</p:column>
+				<p:column headerText="Prix">
+					<h:outputText value="#{produit.prix}" />
+				</p:column>
+				<p:column headerText="Quantité">
+					<h:outputText value="#{produit.quantite}" />
+				</p:column>
+				<p:column headerText="Selection">
+					<h:outputText value="#{produit.selectionne}" />
+				</p:column>
+				<p:column headerText="Catégorie">
+					<h:outputText value="#{produit.categorie.nomCategorie}" />
+				</p:column>
+			</p:dataTable>
+		</div>
+	</div>
+	<div class="footerbis">
+		<ui:insert>
+			<ui:include src="/resources/Templates/footerClient.xhtml" />
+		</ui:insert>
+	</div>
 </h:body>
 </html>

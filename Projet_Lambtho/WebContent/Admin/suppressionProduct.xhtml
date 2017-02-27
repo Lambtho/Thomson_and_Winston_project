@@ -6,15 +6,19 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>Ajout Produit</title>
+	<title>Supprimer Produit</title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-3.1.1.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
-<h:body>
+<h:body styleClass="hbody">
 	<ui:insert>
 		<ui:include src="/resources/Templates/headerAdmin.xhtml" />
 	</ui:insert>
-	<h1>Suppression Produit</h1>
-	<h:form>
+	<h1 class="titre2">Suppression Produit</h1>
+	<h:form styleClass="produits">
 		<h:panelGrid columns="3">
 			<h:outputText value="Id Produit : " />
 			<h:selectOneMenu id="idProd_id" label="Id produit"
@@ -27,6 +31,11 @@
 		</h:panelGrid>
 		<h:commandButton value="Supprimer" action="#{adminMB.delProduct}" />
 	</h:form>
+	<div class="footer">
+	<ui:insert>
+			<ui:include src="/resources/Templates/footerClient.xhtml" />
+		</ui:insert>
+	</div>
 
 </h:body>
 </html>

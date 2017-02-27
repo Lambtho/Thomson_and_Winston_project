@@ -8,16 +8,20 @@
 
 <h:head>
 	<title>Login - Administration</title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-3.1.1.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
-<h:body>
+<h:body styleClass="hbody">
 	<p:breadCrumb>
 		<p:menuitem value="Accueil" url="/accueil.xhtml" />
 	</p:breadCrumb>
 	<f:event type="preRenderView"
 		listener="#{adminMB.checkPermissionslogin}" />
 	<div align="center">
-		<h1>Page de connexion</h1>
+		<h1 class="titre2">Page de connexion</h1>
 		<h:form>
 			<h:panelGrid columns="3">
 				<h:outputText value="eMail : " />

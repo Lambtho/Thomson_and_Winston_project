@@ -8,13 +8,25 @@
 
 <h:head>
 	<title>Index</title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-3.1.1.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
-<h:body>	
-	<h1>Index</h1>
-	<ui:insert>
-		<ui:include src="/resources/Templates/headerClient.xhtml" />
-	</ui:insert>
-<p>Bonjour</p>
+<h:body styleClass="vague">
+	<h1 class="titre">Thomson &amp; Winston Cie</h1>
+	<div class="jumb">
+		<div class="jumbotron">
+			<h1>Bienvenue !</h1>
+			<p>Venez découvrir notre gamme exclusive de produits de glisse
+				extrême en tous genres pour les grands et les petits</p>
+			<p>
+				<a class="btn btn-warning btn-lg"
+					href="/Projet_Lambtho/accueil.xhtml" role="button">Commencez
+					votre exploration !</a>
+			</p>
+		</div>
+	</div>
 </h:body>
 </html>
