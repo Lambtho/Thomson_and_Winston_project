@@ -38,7 +38,8 @@
 		<h:panelGrid columns="3">
 			<h:outputText value="Id : " />
 			<h:inputText id="id_id" disabled="true"
-				value="#{adminMB.produit.idProduit}" required="true"/>
+				value="#{adminMB.produit.idProduit}" required="true" />
+			<h:message for="id_id" style="color:red" />
 			<h:outputText value="Catégorie : " />
 			<h:selectOneMenu id="categorie_id" label="Catégorie"
 				value="#{adminMB.indexSelect}"
