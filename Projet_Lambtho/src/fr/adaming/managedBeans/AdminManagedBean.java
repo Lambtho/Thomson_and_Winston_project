@@ -45,12 +45,13 @@ public class AdminManagedBean implements Serializable {
 	String indexSelect;
 	String indexSelectId;
 	long indexUpdate;
+	Produit produitUpdate;
 
 	public AdminManagedBean() {
 		this.administrateur = new AdminProd();
 		this.produit = new Produit();
 		this.categorie = new Categorie();
-		this.listeCategories = new ArrayList<>();
+		this.listeCategories = new ArrayList<Categorie>();
 		this.indexSelectId = "0";
 	}
 
@@ -159,11 +160,15 @@ public class AdminManagedBean implements Serializable {
 	}
 
 	public String updateProduct() {
-		System.out.println(
-				"abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" + this.produit.getIdProduit());
-
-		this.produit.setCategorie(this.categorie);
-		this.resultat = adminService.updateProductService(this.produit);
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession httpSession = (HttpSession) (fc.getExternalContext().getSession(false));
+		produitUpdate = (Produit) httpSession.getAttribute("produitUpdate");
+		this.produitUpdate.setDesignation(this.produit.getDesignation());
+		this.produitUpdate.setDescription(this.produit.getDescription());
+		this.produitUpdate.setPrix(this.produit.getPrix());
+		this.produitUpdate.setQuantite(this.produit.getQuantite());
+		this.produitUpdate.setCategorie(this.categorie);
+		this.resultat = adminService.updateProductService(this.produitUpdate);
 		return "Accueil";
 	}
 
@@ -176,7 +181,9 @@ public class AdminManagedBean implements Serializable {
 
 		long newId = Long.parseLong((String) event.getNewValue());
 		this.produit = adminService.getByIdProductService(newId);
-		this.produit.getIdProduit();
+		this.produitUpdate = new Produit(this.produit.getIdProduit(), this.produit.getDesignation(),
+				this.produit.getDescription(), this.produit.getPrix(), this.produit.getQuantite(), false);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitUpdate", produitUpdate);
 	}
 
 	public void refreshOneCategorie(ValueChangeEvent event) {
