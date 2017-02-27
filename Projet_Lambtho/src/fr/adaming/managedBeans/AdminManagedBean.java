@@ -169,6 +169,7 @@ public class AdminManagedBean implements Serializable {
 		this.produitUpdate.setQuantite(this.produit.getQuantite());
 		this.produitUpdate.setCategorie(this.categorie);
 		this.resultat = adminService.updateProductService(this.produitUpdate);
+		this.produit = this.produitUpdate;
 		return "Accueil";
 	}
 
