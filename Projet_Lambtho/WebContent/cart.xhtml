@@ -24,7 +24,7 @@
 	<div class="barreRecherche"></div>
 	<div class="menuCategories">
 		<h:form styleClass="produits">
-			<p:dataTable var="produit" value="#{clientMB.listeProduits}">
+			<p:dataTable var="produit" value="#{clientMB.listeProduits}" rowIndexVar="indexrow">
 				<p:column headerText="Id">
 					<h:outputText value="#{produit.idProduit}" />
 				</p:column>
@@ -47,10 +47,10 @@
 					<h:outputText value="#{produit.categorie.nomCategorie}" />
 				</p:column>
 				<p:column>
-					<h:commandButton action="#{clientMB.selectProduct}"
+					<h:commandButton action="#{clientMB.deleteProduct}"
 						value="Supprimer">
-						<f:setPropertyActionListener value="#{produit}"
-							target="#{clientMB.produit}" />
+						<f:setPropertyActionListener value="#{indexrow}"
+							target="#{clientMB.indexrow}" />
 					</h:commandButton>
 				</p:column>
 			</p:dataTable>

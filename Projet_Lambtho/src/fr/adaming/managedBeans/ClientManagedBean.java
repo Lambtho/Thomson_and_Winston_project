@@ -43,7 +43,8 @@ public class ClientManagedBean implements Serializable {
 	List<Commande> listeCommande;
 
 	String indexCat;
-	String recherche="";
+	String recherche = "";
+	int indexrow;
 
 	public ClientManagedBean() {
 		client = new Client();
@@ -131,34 +132,42 @@ public class ClientManagedBean implements Serializable {
 		this.recherche = recherche;
 	}
 
+	public int getIndexrow() {
+		return indexrow;
+	}
+
+	public void setIndexrow(int indexrow) {
+		this.indexrow = indexrow;
+	}
+
 	// Méthodes
 	@PostConstruct
 	public void getAllCategories() {
 		this.listeCategories = clientService.getAllCategories();
-		System.out.println("=================**>"+this.listeProduits);
+		System.out.println("=================**>" + this.listeProduits);
 		this.listeProduits = clientService.getProductByKeyWordService(this.recherche);
-		System.out.println("=================**>"+this.listeProduits);
+		System.out.println("=================**>" + this.listeProduits);
 	}
 
 	public void getAllProd() {
 		this.listeProduits = clientService.getProductByKeyWordService("");
 	}
-	
+
 	public void getProd() {
-		System.out.println("=================+>"+this.listeProduits);
+		System.out.println("=================+>" + this.listeProduits);
 		this.listeProduits = clientService.getProductByKeyWordService(this.recherche);
-		System.out.println("=================+>"+this.listeProduits);
+		System.out.println("=================+>" + this.listeProduits);
 
 	}
 
 	public void getCart() {
 		List<LigneCommande> llcmd = this.commande.getListeLignesCommandes();
 		this.listeProduits.clear();
-		for(LigneCommande lc:llcmd){
+		for (LigneCommande lc : llcmd) {
 			this.listeProduits.add(lc.getProduit());
 		}
 	}
-	
+
 	public String getProdByCat() {
 		this.listeProduits = clientService.getProductByCatService(Integer.parseInt(this.indexCat));
 		return null;
@@ -171,29 +180,29 @@ public class ClientManagedBean implements Serializable {
 	}
 
 	public String order() {
-		
-		this.commande.setClient(this.client);		
-		
+
+		this.commande.setClient(this.client);
+
 		List<Commande> listCmd = new ArrayList<Commande>();
 		listCmd = this.client.getListeCommande();
 		listCmd.add(this.commande);
 		this.client.setListeCommande(listCmd);
 		clientService.orderService(client);
 		// débiter les stocks
-		for(LigneCommande lc : this.listeLignesCmd){
-			
+		for (LigneCommande lc : this.listeLignesCmd) {
+
 			Produit p = new Produit();
 			p = lc.getProduit();
 			int quantt = p.getQuantite();
-			
+
 			int quanttStock = clientService.getProductByIdService(p).get(0).getQuantite();
 			System.out.println("///////////////////////////////////////////////////////////////////////");
-			System.out.println("quantt =>"+quantt);
-			System.out.println("quanttStock =>"+quanttStock);
-			p.setQuantite(quanttStock-quantt);
+			System.out.println("quantt =>" + quantt);
+			System.out.println("quanttStock =>" + quanttStock);
+			p.setQuantite(quanttStock - quantt);
 			System.out.println(p);
 			int verif = adminService.updateProductService(p);
-			System.out.println("verif"+verif);
+			System.out.println("verif" + verif);
 		}
 
 		client = new Client();
@@ -207,9 +216,9 @@ public class ClientManagedBean implements Serializable {
 		this.produit.setListeLigneCommandes(listeLignesCmd);
 		this.commande.setListeLignesCommandes(listeLignesCmd);
 		this.client.setListeCommande(listeCommande);
-		
+
 		listeProduits = clientService.getProductByKeyWordService("");
-		
+
 		return "Accueil";
 	}
 
@@ -231,7 +240,6 @@ public class ClientManagedBean implements Serializable {
 		this.produit.setListeLigneCommandes(llcmd);
 
 		// Ajout de la ligne commande dans la commande
-		
 
 		llcmd = this.commande.getListeLignesCommandes();
 		llcmd.add(lc);
@@ -240,21 +248,27 @@ public class ClientManagedBean implements Serializable {
 		// Le produit est sélectionné
 		this.produit.setSelectionne(true);
 
-		
-		 System.out.println(
-		 "====================================================================================================================");
-		 System.out.println(commande);
-		 for (LigneCommande lc1 : commande.getListeLignesCommandes()) {
-		 System.out.println(lc1.getProduit());
-		 }
-		 for (LigneCommande lc2 : commande.getListeLignesCommandes()) {
-		 System.out.println(lc2);
-		 }
-		 System.out.println(
-		 "====================================================================================================================");
+//		System.out.println(
+//				"====================================================================================================================");
+//		System.out.println(commande);
+//		for (LigneCommande lc1 : commande.getListeLignesCommandes()) {
+//			System.out.println(lc1.getProduit());
+//		}
+//		for (LigneCommande lc2 : commande.getListeLignesCommandes()) {
+//			System.out.println(lc2);
+//		}
+//		System.out.println(
+//				"====================================================================================================================");
 
 		// Regeneration de la liste de produits
 		listeProduits = clientService.getProductByKeyWordService("");
+		return null;
+	}
+
+	public String deleteProduct() {
+
+		this.listeLignesCmd.remove(indexrow);
+		
 		return null;
 	}
 }

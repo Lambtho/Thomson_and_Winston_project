@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
@@ -22,6 +23,7 @@ import fr.adaming.service.IAdministrateurService;
 import fr.adaming.service.IClientService;
 
 @ManagedBean(name = "adminMB")
+@SessionScoped
 public class AdminManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -42,13 +44,14 @@ public class AdminManagedBean implements Serializable {
 	int resultat;
 	String indexSelect;
 	String indexSelectId;
+	long indexUpdate;
 
 	public AdminManagedBean() {
 		this.administrateur = new AdminProd();
 		this.produit = new Produit();
 		this.categorie = new Categorie();
 		this.listeCategories = new ArrayList<>();
-		this.indexSelectId="";
+		this.indexSelectId = "0";
 	}
 
 	public AdminProd getAdministrateur() {
@@ -115,39 +118,38 @@ public class AdminManagedBean implements Serializable {
 		this.indexSelectId = indexSelectId;
 	}
 
+	public long getIndexUpdate() {
+		return indexUpdate;
+	}
+
+	public void setIndexUpdate(long indexUpdate) {
+		this.indexUpdate = indexUpdate;
+	}
+
 	// Méthodes
 	@PostConstruct
 	public void getAllPostConstr() {
 		this.listeCategories = clientService.getAllCategories();
 		this.listeProduits = adminService.getAllProductService();
-		this.produit = listeProduits.get(0);
+		this.produit = listeProduits.get(Integer.parseInt(indexSelectId));
 	}
 
 	public String addProduct() {
-		
+
 		Categorie cat = new Categorie();
 		cat = this.listeCategories.get(Integer.parseInt(this.indexSelect) - 1);
-		
-		
-		Produit p = new Produit(this.produit.getDesignation(), this.produit.getDescription(), this.produit.getPrix(), this.produit.getQuantite(), false);
+
+		Produit p = new Produit(this.produit.getDesignation(), this.produit.getDescription(), this.produit.getPrix(),
+				this.produit.getQuantite(), false);
 		p.setCategorie(cat);
-		
+
 		this.resultat = adminService.addProductService(p);
 		List<Produit> lp = new ArrayList<Produit>();
 		lp = adminService.getAllProductService();
-		p = lp.get(lp.size()-1);
-		
-//		List<Produit> listProd = new ArrayList<Produit>();
-//		listProd = cat.getListeProduits();
-//		listProd.add(p);
-//		cat.setListeProduits(listProd);
-//		p.setCategorie(cat);
-		
+		p = lp.get(lp.size() - 1);
+
 		adminService.updateProductService(p);
-		
-		System.out.println("resultat=>"+this.resultat);
-		System.out.println("produit=>"+p);
-		System.out.println("categorie=>"+cat);
+
 		return "Accueil";
 	}
 
@@ -157,9 +159,10 @@ public class AdminManagedBean implements Serializable {
 	}
 
 	public String updateProduct() {
-		System.out.println("=========================>" + this.produit);
+		System.out.println(
+				"abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" + this.produit.getIdProduit());
+
 		this.produit.setCategorie(this.categorie);
-		System.out.println("+++++++++++++++++++++++++>" + this.produit);
 		this.resultat = adminService.updateProductService(this.produit);
 		return "Accueil";
 	}
@@ -173,13 +176,13 @@ public class AdminManagedBean implements Serializable {
 
 		long newId = Long.parseLong((String) event.getNewValue());
 		this.produit = adminService.getByIdProductService(newId);
-
+		this.produit.getIdProduit();
 	}
 
 	public void refreshOneCategorie(ValueChangeEvent event) {
 
 		this.categorie = this.listeCategories.get(Integer.parseInt((String) event.getNewValue()) - 1);
-		}
+	}
 
 	public String connexion() {
 

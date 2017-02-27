@@ -18,6 +18,8 @@
 		<ui:include src="/resources/Templates/headerAdmin.xhtml" />
 	</ui:insert>
 	<h1 class="titre2">Modification Produit</h1>
+
+	<!-- 	//Sélection de l'id du produit à modifier -->
 	<h:form styleClass="produits">
 		<h:panelGrid columns="3">
 			<h:outputText value="Id Produit : " />
@@ -30,10 +32,16 @@
 			<h:message for="idProd_id" style="color:red" />
 		</h:panelGrid>
 	</h:form>
+
+	<!-- 	Formulaire avec les champs à modifier -->
 	<h:form styleClass="produits">
 		<h:panelGrid columns="3">
+			<h:outputText value="Id : " />
+			<h:inputText id="id_id" disabled="true"
+				value="#{adminMB.produit.idProduit}" required="true"/>
 			<h:outputText value="Catégorie : " />
-			<h:selectOneMenu id="categorie_id" label="Catégorie" value="#{adminMB.indexSelect}"
+			<h:selectOneMenu id="categorie_id" label="Catégorie"
+				value="#{adminMB.indexSelect}"
 				valueChangeListener="#{adminMB.refreshOneCategorie}">
 				<f:selectItems value="#{adminMB.listeCategories}" var="categorie"
 					itemLabel="#{categorie.nomCategorie}"
@@ -66,7 +74,7 @@
 		<h:commandButton value="Modifier" action="#{adminMB.updateProduct}" />
 	</h:form>
 	<div class="footer">
-	<ui:insert>
+		<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />
 		</ui:insert>
 	</div>

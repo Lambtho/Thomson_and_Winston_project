@@ -28,7 +28,7 @@
 				update="@all" />
 		</h:form>
 	</div>
-	<div class="produits">
+	<div class="produits">	
 		<div class="categories">
 			<h:form>
 				<p:dataTable var="categories" value="#{clientMB.listeCategories}"
@@ -51,9 +51,6 @@
 		</div>
 		<div class="result">
 			<p:dataTable var="produit" value="#{clientMB.listeProduits}">
-				<p:column headerText="Id">
-					<h:outputText value="#{produit.idProduit}" />
-				</p:column>
 				<p:column headerText="Désignation">
 					<h:outputText value="#{produit.designation}" />
 				</p:column>
@@ -71,6 +68,19 @@
 				</p:column>
 				<p:column headerText="Catégorie">
 					<h:outputText value="#{produit.categorie.nomCategorie}" />
+				</p:column>
+				<p:column headerText="Quantité" styleClass="coloneQuantiteSelect">
+					<h:inputText value="#{produit.quantite}" required="true"
+						id="saisieQtt" styleClass="inputQtt">
+						<f:convertNumber type="number" integerOnly="true" />
+					</h:inputText>
+				</p:column>
+				<p:column styleClass="coloneSelect">
+					<h:commandButton action="#{clientMB.selectProduct}" value="Panier"
+						styleClass="boutonSelect">
+						<f:setPropertyActionListener value="#{produit}"
+							target="#{clientMB.produit}" />
+					</h:commandButton>
 				</p:column>
 			</p:dataTable>
 		</div>
