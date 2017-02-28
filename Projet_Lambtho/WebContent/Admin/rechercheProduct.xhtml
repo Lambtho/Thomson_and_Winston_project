@@ -15,11 +15,15 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+	<!-- Insertion du header -->
 	<ui:insert>
 		<ui:include src="/resources/Templates/headerAdmin.xhtml" />
 	</ui:insert>
-	
+
 	<h2 class="titre2">Recherche d'un produit</h2>
+
+	<!-- 	Selection de l'id du produit à afficher -->
 	<h:form styleClass="produits">
 		<h:panelGrid columns="3">
 			<h:outputText value="Id Produit : " />
@@ -30,9 +34,14 @@
 			</h:selectOneMenu>
 			<h:message for="idProd_id" style="color:red" />
 		</h:panelGrid>
+
+		<!-- 		Appel de la managedBean -->
 		<h:commandButton value="Rechercher" action="#{adminMB.findProduct}" />
 	</h:form>
-	<p:dataTable styleClass="produits" var="produit" value="#{adminMB.produit}">
+
+	<!-- 	Affichage du resultat -->
+	<p:dataTable styleClass="produits" var="produit"
+		value="#{adminMB.produit}">
 		<p:column headerText="Id">
 			<h:outputText value="#{produit.idProduit}" />
 		</p:column>
@@ -58,9 +67,11 @@
 	<br />
 	<br />
 </h:body>
+
+<!-- Insertion du footer -->
 <div class="footer">
 	<ui:insert>
-			<ui:include src="/resources/Templates/footerClient.xhtml" />
-		</ui:insert>
-	</div>
+		<ui:include src="/resources/Templates/footerClient.xhtml" />
+	</ui:insert>
+</div>
 </html>

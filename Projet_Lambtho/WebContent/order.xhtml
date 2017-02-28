@@ -15,13 +15,22 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+	<!-- Récupère le panier du client ce qui est totalement inutile car on ne l'affiche pas. -->
+	<!-- Il s'agit très probablement d'un copier-coller foiré =) -->
 	<f:event type="preRenderView" listener="#{clientMB.getCart}" />
+
+	<!-- 	Insertion du header -->
 	<div class="header">
 		<ui:insert>
 			<ui:include src="/resources/Templates/headerClient.xhtml" />
 		</ui:insert>
 	</div>
+
+	<!-- 	Div inutile -->
 	<div class="barreRecherche"></div>
+
+	<!-- 	Formulaire de saisie des informations du client -->
 	<div class="menuCategories">
 		<h:form styleClass="produits">
 			<h2 class="titre3">Saisie de vos informations personnelles</h2>
@@ -49,14 +58,20 @@
 					required="true" label="Téléphnone">
 				</h:inputText>
 				<h:message for="nom_id" style="color:red" />
-				</h:panelGrid>
+			</h:panelGrid>
+
+			<!-- 				Appel du managedBean -->
 			<h:commandButton value="Acheter" action="#{clientMB.order}" />
 		</h:form>
-		<br/>
+		<br />
 	</div>
+
+	<!-- 	div inutile. Ca commence à devenir lassant... -->
 	<div class="produits"></div>
+
+	<!-- 	Insertion du footer -->
 	<div class="footer">
-	<ui:insert>
+		<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />
 		</ui:insert>
 	</div>

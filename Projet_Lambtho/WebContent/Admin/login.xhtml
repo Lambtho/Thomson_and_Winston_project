@@ -15,19 +15,27 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+	<!-- Insertion du header -->
 	<p:breadCrumb>
 		<p:menuitem value="Accueil" url="/accueil.xhtml" />
 	</p:breadCrumb>
+
+	<!-- 	Appel de la méthode de vérification des autorisation -->
+	<!-- 	Si l'utilisateur est déjà identifié, il sera redirigé vers l'accueil -->
 	<f:event type="preRenderView"
 		listener="#{adminMB.checkPermissionslogin}" />
+
+
 	<div align="center">
 		<h1 class="titre2">Page de connexion</h1>
+
+		<!-- 		Formulaire de saisie des identifiants -->
 		<h:form>
 			<h:panelGrid columns="3">
 				<h:outputText value="eMail : " />
 				<h:inputText id="mail_id" value="#{adminMB.administrateur.email}"
 					required="true" label="Mail">
-					<!-- 					<f:validator validatorId="validatorEmail" /> -->
 				</h:inputText>
 				<h:message for="mail_id" style="color:red" />
 
@@ -37,6 +45,8 @@
 					label="Password" />
 				<h:message for="pwd_id" style="color:red" />
 			</h:panelGrid>
+
+			<!-- 			Appel de la managedBean -->
 			<h:commandButton value="Connexion" action="#{adminMB.connexion}" />
 		</h:form>
 	</div>

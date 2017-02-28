@@ -14,10 +14,15 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+	<!-- Insertion du header -->
 	<ui:insert>
 		<ui:include src="/resources/Templates/headerAdmin.xhtml" />
 	</ui:insert>
+	
 	<h1 class="titre2">Ajout Produit</h1>
+	
+<!-- 	Formulaire d'ajout du produit -->
 	<h:form styleClass="produits">
 		<h:panelGrid columns="3">
 			<h:outputText value="Désignation : " />
@@ -32,9 +37,12 @@
 				label="Description" />
 			<h:message for="description_id" style="color:red" />
 
+			<!-- Menu déroulant pour sélectionner la catégorie -->
 			<h:outputText value="Catégorie : " />
 			<h:selectOneMenu id="categorie_id" label="Catégorie"
 				value="#{adminMB.indexSelect}">
+				
+				<!-- 				Affiche le nom de la catégorie et renvoi son index -->
 				<f:selectItems value="#{adminMB.listeCategories}" var="categorie"
 					itemLabel="#{categorie.nomCategorie}"
 					itemValue="#{categorie.idCategorie}" />
@@ -51,8 +59,12 @@
 				required="true" label="Quantité" />
 			<h:message for="quantite_id" style="color:red" />
 		</h:panelGrid>
+		
+<!-- 		Appel du managedBean -->
 		<h:commandButton value="Ajouter" action="#{adminMB.addProduct}" />
 	</h:form>
+
+	<!-- 	Insertion du footer -->
 	<div class="footer">
 	<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />

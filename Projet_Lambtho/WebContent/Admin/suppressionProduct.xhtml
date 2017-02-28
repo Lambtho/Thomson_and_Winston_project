@@ -14,10 +14,15 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+	<!-- Insertion du header -->
 	<ui:insert>
 		<ui:include src="/resources/Templates/headerAdmin.xhtml" />
 	</ui:insert>
+	
 	<h1 class="titre2">Suppression Produit</h1>
+	
+<!-- 	Sélection de l'id du produit à supprimer -->
 	<h:form styleClass="produits">
 		<h:panelGrid columns="3">
 			<h:outputText value="Id Produit : " />
@@ -29,8 +34,12 @@
 			</h:selectOneMenu>
 			<h:message for="idProd_id" style="color:red" />
 		</h:panelGrid>
+
+		<!-- 		Appel de la managedBean -->
 		<h:commandButton value="Supprimer" action="#{adminMB.delProduct}" />
 	</h:form>
+	
+<!-- 	insertion du footer -->
 	<div class="footer">
 	<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />

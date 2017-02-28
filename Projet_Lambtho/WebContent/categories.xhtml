@@ -15,12 +15,15 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+	<!-- Insertion du header -->
 	<div class="header">
 		<ui:insert>
 			<ui:include src="/resources/Templates/headerClient.xhtml" />
 		</ui:insert>
 	</div>
 
+	<!-- Insertion de la barre de recherche -->
 	<div class="barreRecherche">
 		<h:form>
 			<h:inputText styleClass="barre" value="#{clientMB.recherche}" />
@@ -28,9 +31,12 @@
 				update="@all" />
 		</h:form>
 	</div>
-	<div class="produits">	
+
+	<!-- 	Affichage des catégories -->
+	<div class="produits">
 		<div class="categories">
 			<h:form>
+				<!-- 			Affichage de toute la liste -->
 				<p:dataTable var="categories" value="#{clientMB.listeCategories}"
 					rowIndexVar="idLigne">
 					<p:column>
@@ -39,9 +45,11 @@
 					<p:column>
 						<h:outputText value="#{categories.description}" />
 					</p:column>
+
+					<!-- 	Au clic sur le bouton, on appel la managed bean qui va remplir le tableau avec les produits de la catégorie choisie -->
 					<p:column>
-						<p:commandButton action="#{clientMB.getProdByCat}"
-							value="Voir" update="@all">
+						<p:commandButton action="#{clientMB.getProdByCat}" value="Voir"
+							update="@all">
 							<f:setPropertyActionListener value="#{categories.idCategorie}"
 								target="#{clientMB.indexCat}" />
 						</p:commandButton>
@@ -49,6 +57,8 @@
 				</p:dataTable>
 			</h:form>
 		</div>
+		
+<!-- 		Affichage des produits de la catégorie selectionnée -->
 		<div class="result">
 			<p:dataTable var="produit" value="#{clientMB.listeProduits}">
 				<p:column headerText="Désignation">
@@ -75,6 +85,8 @@
 						<f:convertNumber type="number" integerOnly="true" />
 					</h:inputText>
 				</p:column>
+				
+<!-- 				Bouton d'ajout au panier -->
 				<p:column styleClass="coloneSelect">
 					<h:commandButton action="#{clientMB.selectProduct}" value="Panier"
 						styleClass="boutonSelect">
@@ -85,6 +97,8 @@
 			</p:dataTable>
 		</div>
 	</div>
+	
+<!-- 	Insertion du footer -->
 	<div class="footerbis">
 		<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />

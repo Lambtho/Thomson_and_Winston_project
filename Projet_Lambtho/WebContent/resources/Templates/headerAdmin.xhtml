@@ -16,6 +16,8 @@
 <h:body>
 	<!-- 	Menu -->
 	<ui:composition>
+
+		<!-- 	Appel de la méthode pour vérifier que l'utilisteur est bien identifié sur toutes les pages administrateur -->
 		<f:event type="preRenderView" listener="#{adminMB.checkPermissions}" />
 		<h1 class="titre2">Thomson &amp; Winston Cie</h1>
 		<p:breadCrumb>
@@ -26,6 +28,8 @@
 			<p:menuitem value="Supprimer" url="/Admin/suppressionProduct.xhtml" />
 			<p:menuitem value="Chercher" url="/Admin/rechercheProduct.xhtml" />
 		</p:breadCrumb>
+
+		<!-- 		Bouton de deconnexion -->
 		<h:form>
 			<h:commandButton value="Déconnexion" action="#{adminMB.deconnexion}"></h:commandButton>
 		</h:form>

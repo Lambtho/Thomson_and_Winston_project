@@ -14,6 +14,8 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+<!-- Insertion du header -->
 	<ui:insert>
 		<ui:include src="/resources/Templates/headerAdmin.xhtml" />
 	</ui:insert>
@@ -23,6 +25,9 @@
 	<h:form styleClass="produits">
 		<h:panelGrid columns="3">
 			<h:outputText value="Id Produit : " />
+
+			<!-- 			onchange => formulaire envoyé dès qu'un nouvel id est sélectionné -->
+			<!-- 			valueChangelistener => envoi vers la méthode qui récupère le produit sélectionné avec son index -->
 			<h:selectOneMenu id="idProd_id" label="Id produit"
 				value="#{adminMB.indexSelectId}" onchange="submit()"
 				valueChangeListener="#{adminMB.refreshOneProduct}">
@@ -72,8 +77,12 @@
 				required="true" label="Quantité" />
 			<h:message for="quantite_id" style="color:red" />
 		</h:panelGrid>
+
+		<!-- 		Appel de la managedBean -->
 		<h:commandButton value="Modifier" action="#{adminMB.updateProduct}" />
 	</h:form>
+
+	<!-- 	Insertion du footer -->
 	<div class="footer">
 		<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />

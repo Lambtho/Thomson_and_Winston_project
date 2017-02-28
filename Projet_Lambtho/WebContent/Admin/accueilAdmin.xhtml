@@ -15,12 +15,15 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+<!-- Insertion du header -->
 	<ui:insert>
 		<ui:include src="/resources/Templates/headerAdmin.xhtml" />
 	</ui:insert>
 	<h1 class="titre2">Interface Administrateur</h1>
 	<h2 class="titre4">Liste des produits</h2>
 
+<!-- Affichage de la liste des produits -->
 	<p:dataTable styleClass="produits" var="produit" value="#{adminMB.listeProduits}">
 		<p:column headerText="Id">
 			<h:outputText value="#{produit.idProduit}" />
@@ -46,6 +49,8 @@
 	</p:dataTable>
 	<br />
 	<br />
+
+	<!-- 	Insertion du footer -->
 	<div class="footer">
 	<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />

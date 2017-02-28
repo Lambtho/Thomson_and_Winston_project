@@ -16,19 +16,27 @@
 
 <h:body styleClass="hbody">
 	<div class="header">
+
+		<!-- 	Insertion du header -->
 		<ui:insert>
 			<ui:include src="/resources/Templates/headerClient.xhtml" />
 		</ui:insert>
 	</div>
 
 	<div class="barreRecherche">
+
+		<!-- 	formulaire de saisie du mot clef dans la barre de recherche -->
 		<h:form>
 			<h:inputText styleClass="barre" value="#{clientMB.recherche}" />
 			<p:commandButton action="#{clientMB.getByKeyWord}" value="Rechercher"
 				update="@all" />
 		</h:form>
 	</div>
+
+	<!-- 	Division inutile -->
 	<div class="menuCategories"></div>
+
+	<!-- 	Affichage des produits -->
 	<div class="produits">
 		<f:event type="preRenderView" listener="#{clientMB.getProd}" />
 		<h:form>
@@ -48,15 +56,23 @@
 				<p:column headerText="Catégorie" styleClass="coloneCategorie">
 					<h:outputText value="#{produit.categorie.nomCategorie}" />
 				</p:column>
+
+				<!-- 				Champ de saisie du nombre de produits à acheter -->
 				<p:column headerText="Quantité" styleClass="coloneQuantiteSelect">
 					<h:inputText value="#{produit.quantite}" required="true"
 						id="saisieQtt" styleClass="inputQtt">
+
+						<!-- 						Conversion de la valeur saisie en entier -->
 						<f:convertNumber type="number" integerOnly="true" />
 					</h:inputText>
 				</p:column>
+
+				<!-- 				Bouton pour ajouter le produit au panier -->
 				<p:column styleClass="coloneSelect">
 					<h:commandButton action="#{clientMB.selectProduct}" value="Panier"
 						styleClass="boutonSelect">
+
+						<!-- renvoi le produit de la ligne dans la variable de produit (utilisation d'un listenner) -->
 						<f:setPropertyActionListener value="#{produit}"
 							target="#{clientMB.produit}" />
 					</h:commandButton>
@@ -65,8 +81,9 @@
 		</h:form>
 	</div>
 
+	<!-- Insertion du footer -->
 	<div class="footer">
-	<ui:insert>
+		<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />
 		</ui:insert>
 	</div>

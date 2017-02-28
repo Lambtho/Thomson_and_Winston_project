@@ -15,16 +15,25 @@
 </h:head>
 
 <h:body styleClass="hbody">
+
+	<!-- Récupère le contenu du panier au chargement de la page -->
 	<f:event type="preRenderView" listener="#{clientMB.getCart}" />
+
+	<!-- 	Insertion du header -->
 	<div class="header">
 		<ui:insert>
 			<ui:include src="/resources/Templates/headerClient.xhtml" />
 		</ui:insert>
 	</div>
+
+	<!-- 	Div inutile (une de plus) -->
 	<div class="barreRecherche"></div>
+
+	<!-- 	Affichage du panier -->
 	<div class="menuCategories">
 		<h:form styleClass="produits">
-			<p:dataTable var="produit" value="#{clientMB.listeProduits}" rowIndexVar="indexrow">
+			<p:dataTable var="produit" value="#{clientMB.listeProduits}"
+				rowIndexVar="indexrow">
 				<p:column headerText="Id">
 					<h:outputText value="#{produit.idProduit}" />
 				</p:column>
@@ -54,17 +63,22 @@
 					</h:commandButton>
 				</p:column>
 			</p:dataTable>
-			<h:commandButton value="Passer la commande" action="/order.xhtml"/>
+
+			<!-- 			Lien vers la page de commande -->
+			<h:commandButton value="Passer la commande" action="/order.xhtml" />
 		</h:form>
 	</div>
+
+	<!-- 	Div inutile (mais quel travail de sagouin !) -->
 	<div class="produits"></div>
+
+	<!-- 	Insertion du footer -->
 	<div class="footer">
-	
-	<ui:insert>
+		<ui:insert>
 			<ui:include src="/resources/Templates/footerClient.xhtml" />
 		</ui:insert>
 	</div>
-	
+
 
 </h:body>
 </html>
